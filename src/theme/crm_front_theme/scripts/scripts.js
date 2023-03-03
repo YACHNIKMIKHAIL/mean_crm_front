@@ -9,12 +9,9 @@ const $ttp = $(".tooltipped");
 
 if ($tt) {
       const tapTarget = M.TapTarget.init($tt);
-      $("#dashboard-info").addEventListener(
-            "click",
-            function () {
-                  tapTarget.open();
-            },
-      );
+      $("#dashboard-info").addEventListener("click", function () {
+            tapTarget.open();
+      });
 }
 
 if ($modal) {

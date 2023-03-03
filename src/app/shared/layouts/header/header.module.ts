@@ -1,8 +1,7 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { HeaderComponent } from "./component/header.component";
-import { RouterModule, RouterOutlet } from "@angular/router";
-import { LoginModule } from "../../../login/login.module";
+import { RouterModule } from "@angular/router";
 
 @NgModule({
       declarations: [HeaderComponent],

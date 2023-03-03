@@ -1,1 +1,4 @@
-<crm-auth-form [title]="'Sign in'" [buttonTitle]="'To come in'"></crm-auth-form>
+<crm-auth-form
+      [title]="'Sign in'"
+      [buttonTitle]="'To come in'"
+      (emitForm)="login($event)"></crm-auth-form>

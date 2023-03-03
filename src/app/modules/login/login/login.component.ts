@@ -5,4 +5,8 @@ import { Component } from "@angular/core";
       templateUrl: "./login.component.html",
       styleUrls: ["./login.component.css"],
 })
-export class LoginComponent {}
+export class LoginComponent {
+      login($event: { email: string; password: string }) {
+            console.log("LoginComponent", $event);
+      }
+}

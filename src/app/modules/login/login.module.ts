@@ -5,9 +5,6 @@ import { AuthFormModule } from "../../shared/auth-form/auth-form.module";
 
 @NgModule({
       declarations: [LoginComponent],
-      imports: [
-            CommonModule,
-            AuthFormModule,
-      ],
+      imports: [CommonModule, AuthFormModule],
 })
 export class LoginModule {}

@@ -5,4 +5,8 @@ import { Component } from "@angular/core";
       templateUrl: "./register.component.html",
       styleUrls: ["./register.component.css"],
 })
-export class RegisterComponent {}
+export class RegisterComponent {
+      register($event: { email: string; password: string }) {
+            console.log("RegisterComponent", $event);
+      }
+}

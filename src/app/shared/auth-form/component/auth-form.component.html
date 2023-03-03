@@ -1,18 +1,21 @@
-<div class="card">
+<form class="card" [formGroup]="authForm" (ngSubmit)="submitForm()">
       <div class="card-content">
             <span class="card-title">{{ titleProps }}</span>
             <div class="input-field">
-                  <input id="email" type="email" required />
+                  <input id="email" type="email" [formControlName]="'email'" />
                   <label for="email">Email:</label>
             </div>
             <div class="input-field">
-                  <input id="password" type="password" required />
+                  <input
+                        id="password"
+                        type="password"
+                        [formControlName]="'password'" />
                   <label for="password">Password:</label>
             </div>
       </div>
       <div class="card-action">
-            <button class="modal-action btn waves-effect">{{
+            <button class="modal-action btn waves-effect" type="submit">{{
                   buttonTitleProps
             }}</button>
       </div>
-</div>
+</form>

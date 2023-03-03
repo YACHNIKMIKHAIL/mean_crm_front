@@ -1,0 +1,14 @@
+{
+      "/crm/*": {
+            "target": "http://localhost:5050",
+            "secure": false,
+            "logLevel": "debug",
+            "changeOrigin": true
+      },
+      "/uploads/*": {
+            "target": "http://localhost:5050",
+            "secure": false,
+            "logLevel": "debug",
+            "changeOrigin": true
+      }
+}

@@ -4,6 +4,11 @@
             <div class="input-field">
                   <input id="email" type="email" [formControlName]="'email'" />
                   <label for="email">Email:</label>
+                  <span
+                        class="helper-text red-text"
+                        *ngIf="authForm.valid && emailIsValid()"
+                        >Invalid email</span
+                  >
             </div>
             <div class="input-field">
                   <input
@@ -11,11 +16,29 @@
                         type="password"
                         [formControlName]="'password'" />
                   <label for="password">Password:</label>
+                  <span
+                        class="helper-text red-text"
+                        *ngIf="
+                              authForm.valid &&
+                              authForm.controls['password'].errors &&
+                              authForm.controls['password'].errors['minlength']
+                                    .actualLength
+                        "
+                        >Required length {{ requiredPasswordLength }}, but
+                        actual is
+                        {{
+                              authForm.controls["password"].errors["minlength"]
+                                    .actualLength
+                        }}</span
+                  >
             </div>
       </div>
       <div class="card-action">
-            <button class="modal-action btn waves-effect" type="submit">{{
-                  buttonTitleProps
-            }}</button>
+            <button
+                  class="modal-action btn waves-effect"
+                  type="submit"
+                  [disabled]="!authForm.valid"
+                  >{{ buttonTitleProps }}</button
+            >
       </div>
 </form>

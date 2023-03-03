@@ -1,5 +1,11 @@
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
-import { FormBuilder, FormControl, FormGroup } from "@angular/forms";
+import {
+      FormBuilder,
+      FormControl,
+      FormGroup,
+      Validators,
+} from "@angular/forms";
+import { AuthFormInterface } from "../../types/auth.types";
 
 @Component({
       selector: "crm-auth-form",
@@ -9,21 +15,33 @@ import { FormBuilder, FormControl, FormGroup } from "@angular/forms";
 export class AuthFormComponent implements OnInit {
       @Input("title") titleProps!: string;
       @Input("buttonTitle") buttonTitleProps!: string;
-      @Output() emitForm = new EventEmitter<{
-            email: string;
-            password: string;
-      }>();
+      @Output() emitAuthForm = new EventEmitter<AuthFormInterface>();
       authForm!: FormGroup;
+
+      requiredPasswordLength = 6;
+
+      emailIsValid(): boolean {
+            return (
+                  this.authForm.controls["email"].errors &&
+                  this.authForm.controls["email"].errors["email"]
+            );
+      }
 
       constructor(private fb: FormBuilder) {}
       submitForm() {
-            this.emitForm.emit(this.authForm.value);
+            this.emitAuthForm.emit(this.authForm.value);
       }
 
       ngOnInit(): void {
             this.authForm = this.fb.group({
-                  email: new FormControl(""),
-                  password: new FormControl(""),
+                  email: new FormControl("", [
+                        Validators.required,
+                        Validators.email,
+                  ]),
+                  password: new FormControl("", [
+                        Validators.required,
+                        Validators.minLength(this.requiredPasswordLength),
+                  ]),
             });
       }
 }

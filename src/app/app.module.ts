@@ -7,7 +7,8 @@ import { LoginModule } from "./modules/login/login.module";
 import { HeaderModule } from "./shared/layouts/header/header.module";
 import { NaviModule } from "./shared/layouts/navi/navi.module";
 import { RegisterModule } from "./modules/register/register.module";
-import { HttpClientModule } from "@angular/common/http";
+import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
+import { TokenInterceptor } from "./shared/classes/token.interceptor";
 
 @NgModule({
       declarations: [AppComponent],
@@ -20,7 +21,13 @@ import { HttpClientModule } from "@angular/common/http";
             RegisterModule,
             HttpClientModule,
       ],
-      providers: [],
+      providers: [
+            {
+                  provide: HTTP_INTERCEPTORS,
+                  useClass: TokenInterceptor,
+                  multi: true,
+            },
+      ],
       bootstrap: [AppComponent],
 })
 export class AppModule {}

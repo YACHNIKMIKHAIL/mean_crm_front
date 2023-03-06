@@ -5,7 +5,7 @@ import { NaviComponent } from "./shared/layouts/navi/component/navi.component";
 import { LoginComponent } from "./modules/login/login/login.component";
 import { RegisterComponent } from "./modules/register/component/register.component";
 import { RouterPathsEnum } from "./shared/enums/routerPaths.enum";
-import { AuthGuard } from "./shared/guards/auth.guard";
+import { AuthGuard } from "./shared/classes/auth.guard";
 
 const routes: Routes = [
       {

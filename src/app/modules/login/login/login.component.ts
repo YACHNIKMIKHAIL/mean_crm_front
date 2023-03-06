@@ -5,6 +5,7 @@ import { AuthFormComponent } from "../../../shared/auth-form/component/auth-form
 import { ActivatedRoute, Params, Router } from "@angular/router";
 import { Subscription } from "rxjs";
 import { RouterPathsEnum } from "../../../shared/enums/routerPaths.enum";
+import {MaterialService} from "../../../shared/classes/material.service";
 
 @Component({
       selector: "crm-login",
@@ -14,11 +15,12 @@ import { RouterPathsEnum } from "../../../shared/enums/routerPaths.enum";
 export class LoginComponent implements OnInit, OnDestroy {
       loginSubscription!: Subscription;
       routeSubscription!: Subscription;
-      @ViewChild("crm-auth-form") crmAuthForm!: AuthFormComponent;
+      @ViewChild("form") crmAuthForm!: AuthFormComponent;
       constructor(
             private authService: AuthService,
             private router: Router,
             private route: ActivatedRoute,
+            private materialService: MaterialService,
       ) {}
       login($event: UserInterface) {
             this.loginSubscription = this.authService.login($event).subscribe(
@@ -26,8 +28,9 @@ export class LoginComponent implements OnInit, OnDestroy {
                         this.router.navigate([RouterPathsEnum.OVERVIEW]);
                   },
                   (err: any) => {
-                        this.crmAuthForm.authForm.enable();
                         console.warn("login failed", err);
+                    this.materialService.toast(err.error.message)
+                    this.crmAuthForm.authForm.enable();
                   },
             );
       }
@@ -43,10 +46,12 @@ export class LoginComponent implements OnInit, OnDestroy {
             this.routeSubscription = this.route.queryParams.subscribe(
                   (params: Params) => {
                         if (params["registered"]) {
+                          this.materialService.toast('You can log in with your own credentials')
                               console.log(
                                     "queryParams => you can log in with your own credentials",
                               );
                         } else if (params["accessDenied"]) {
+                          this.materialService.toast('To get started, log in to the system')
                               console.log(
                                     "queryParams => to get started, log in to the system",
                               );

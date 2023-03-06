@@ -13,7 +13,7 @@ import { Router } from "@angular/router";
 })
 export class RegisterComponent implements OnDestroy {
       registerSubscription!: Subscription;
-      @ViewChild("crm-auth-form") crmAuthForm!: AuthFormComponent;
+      @ViewChild("form") crmAuthForm!: AuthFormComponent;
       constructor(private authService: AuthService, private router: Router) {}
       register($event: UserInterface) {
             this.crmAuthForm.authForm.disable();

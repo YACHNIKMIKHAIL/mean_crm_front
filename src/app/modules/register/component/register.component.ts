@@ -17,15 +17,19 @@ export class RegisterComponent implements OnInit, OnDestroy {
       constructor(private authService: AuthService, private router: Router) {}
       register($event: UserInterface) {
             this.crmAuthForm.authForm.disable();
-            this.authService.register($event).subscribe(
-                  () => {
-                        this.router.navigate([RouterPathsEnum.OVERVIEW]);
-                  },
-                  (err: any) => {
-                        this.crmAuthForm.authForm.enable();
-                        console.log("register failed", err);
-                  },
-            );
+            this.registerSubscription = this.authService
+                  .register($event)
+                  .subscribe(
+                        () => {
+                              this.router.navigate([RouterPathsEnum.LOGIN], {
+                                    queryParams: { registered: true },
+                              });
+                        },
+                        (err: any) => {
+                              this.crmAuthForm.authForm.enable();
+                              console.warn("register failed", err);
+                        },
+                  );
       }
 
       ngOnDestroy(): void {

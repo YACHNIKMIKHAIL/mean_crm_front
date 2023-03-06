@@ -49,14 +49,17 @@
                               *ngIf="
                                     (authForm.get('password')?.errors)![
                                           'minlength'
-                                    ]
+                                    ] &&
+                                    (authForm.get('password')?.errors)![
+                                          'minlength'
+                                    ]['requiredLength']
                               "
                               >Required length {{ requiredPasswordLength }}, but
                               actual is
                               {{
                                     (authForm.get("password")?.errors)![
                                           "minlength"
-                                    ].actualLength
+                                    ]["actualLength"]
                               }}</span
                         ><span
                               *ngIf="

@@ -10,7 +10,6 @@ import { AuthService } from "../../../shared/services/auth/auth.service";
 export class RegisterComponent {
       constructor(private authService: AuthService) {}
       register($event: UserInterface) {
-            console.log("RegisterComponent");
             this.authService.register($event).subscribe(
                   () => console.log("register success"),
                   err => console.log("register failed", err),

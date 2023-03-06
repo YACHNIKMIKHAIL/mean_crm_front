@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       ) {}
       login($event: UserInterface) {
             this.loginSubscription = this.authService.login($event).subscribe(
-              () => {
+                  () => {
                         this.router.navigate([RouterPathsEnum.OVERVIEW]);
                   },
                   (err: any) => {
@@ -40,7 +40,10 @@ export class LoginComponent implements OnInit, OnDestroy {
       }
 
       ngOnInit(): void {
-            this.authService.isAuthenticated();
+            if (this.authService.isAuthenticated()) {
+                  this.router.navigate([RouterPathsEnum.OVERVIEW]);
+            }
+
             this.routeSubscription = this.route.queryParams.subscribe(
                   (params: Params) => {
                         if (params["registered"]) {

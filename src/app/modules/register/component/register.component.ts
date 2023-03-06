@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, ViewChild } from "@angular/core";
+import { Component, OnDestroy, ViewChild } from "@angular/core";
 import { UserInterface } from "../../../shared/interfaces/auth.types";
 import { AuthService } from "../../../shared/services/auth/auth.service";
 import { Subscription } from "rxjs";
@@ -11,7 +11,7 @@ import { Router } from "@angular/router";
       templateUrl: "./register.component.html",
       styleUrls: ["./register.component.css"],
 })
-export class RegisterComponent implements OnInit, OnDestroy {
+export class RegisterComponent implements OnDestroy {
       registerSubscription!: Subscription;
       @ViewChild("crm-auth-form") crmAuthForm!: AuthFormComponent;
       constructor(private authService: AuthService, private router: Router) {}
@@ -35,12 +35,6 @@ export class RegisterComponent implements OnInit, OnDestroy {
       ngOnDestroy(): void {
             if (this.registerSubscription) {
                   this.registerSubscription.unsubscribe();
-            }
-      }
-
-      ngOnInit(): void {
-            if (this.authService.isAuthenticated()) {
-                  this.router.navigate([RouterPathsEnum.OVERVIEW]);
             }
       }
 }

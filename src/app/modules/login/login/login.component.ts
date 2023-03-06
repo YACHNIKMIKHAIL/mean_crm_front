@@ -40,10 +40,6 @@ export class LoginComponent implements OnInit, OnDestroy {
       }
 
       ngOnInit(): void {
-            if (this.authService.isAuthenticated()) {
-                  this.router.navigate([RouterPathsEnum.OVERVIEW]);
-            }
-
             this.routeSubscription = this.route.queryParams.subscribe(
                   (params: Params) => {
                         if (params["registered"]) {

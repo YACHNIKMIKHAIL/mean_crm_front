@@ -5,6 +5,7 @@ import { NaviComponent } from "./shared/layouts/navi/component/navi.component";
 import { LoginComponent } from "./modules/login/login/login.component";
 import { RegisterComponent } from "./modules/register/component/register.component";
 import { RouterPathsEnum } from "./shared/enums/routerPaths.enum";
+import { AuthGuard } from "./shared/guards/auth.guard";
 
 const routes: Routes = [
       {
@@ -29,6 +30,7 @@ const routes: Routes = [
       {
             path: RouterPathsEnum.OVERVIEW,
             component: NaviComponent,
+            canActivate: [AuthGuard],
             children: [
                   {
                         path: RouterPathsEnum.LOGIN,

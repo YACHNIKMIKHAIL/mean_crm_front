@@ -7,7 +7,7 @@ declare var M: any;
 export class MaterialService {
       constructor() {}
 
-  toast(message: string) {
+      toast(message: string) {
             M.toast({ html: message });
       }
 }

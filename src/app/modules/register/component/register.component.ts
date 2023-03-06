@@ -1,5 +1,6 @@
 import { Component } from "@angular/core";
-import { AuthFormInterface } from "../../../shared/types/auth.types";
+import { UserInterface } from "../../../shared/interfaces/auth.types";
+import { AuthService } from "../../../shared/services/auth/auth.service";
 
 @Component({
       selector: "app-register",
@@ -7,7 +8,12 @@ import { AuthFormInterface } from "../../../shared/types/auth.types";
       styleUrls: ["./register.component.css"],
 })
 export class RegisterComponent {
-      register($event: AuthFormInterface) {
-            console.log("RegisterComponent", $event);
+      constructor(private authService: AuthService) {}
+      register($event: UserInterface) {
+            console.log("RegisterComponent");
+            this.authService.register($event).subscribe(
+                  () => console.log("register success"),
+                  err => console.log("register failed", err),
+            );
       }
 }

@@ -4,29 +4,34 @@ import { HeaderComponent } from "./shared/layouts/header/component/header.compon
 import { NaviComponent } from "./shared/layouts/navi/component/navi.component";
 import { LoginComponent } from "./modules/login/login/login.component";
 import { RegisterComponent } from "./modules/register/component/register.component";
+import { RouterPathsEnum } from "./shared/enums/routerPaths.enum";
 
 const routes: Routes = [
       {
-            path: "",
+            path: RouterPathsEnum.DEFAULT,
             component: HeaderComponent,
             children: [
-                  { path: "", redirectTo: "login", pathMatch: "full" },
                   {
-                        path: "login",
+                        path: RouterPathsEnum.DEFAULT,
+                        redirectTo: RouterPathsEnum.LOGIN,
+                        pathMatch: "full",
+                  },
+                  {
+                        path: RouterPathsEnum.LOGIN,
                         component: LoginComponent,
                   },
                   {
-                        path: "register",
+                        path: RouterPathsEnum.REGISTER,
                         component: RegisterComponent,
                   },
             ],
       },
       {
-            path: "xxx",
+            path: RouterPathsEnum.OVERVIEW,
             component: NaviComponent,
             children: [
                   {
-                        path: "login",
+                        path: RouterPathsEnum.LOGIN,
                         component: LoginComponent,
                   },
             ],

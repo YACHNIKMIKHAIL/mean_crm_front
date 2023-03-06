@@ -5,7 +5,7 @@ import {
       FormGroup,
       Validators,
 } from "@angular/forms";
-import { AuthFormInterface } from "../../types/auth.types";
+import { UserInterface } from "../../interfaces/auth.types";
 
 @Component({
       selector: "crm-auth-form",
@@ -15,7 +15,7 @@ import { AuthFormInterface } from "../../types/auth.types";
 export class AuthFormComponent implements OnInit {
       @Input("title") titleProps!: string;
       @Input("buttonTitle") buttonTitleProps!: string;
-      @Output() emitAuthForm = new EventEmitter<AuthFormInterface>();
+      @Output() emitAuthForm = new EventEmitter<UserInterface>();
       authForm!: FormGroup;
 
       requiredPasswordLength = 6;
@@ -29,6 +29,7 @@ export class AuthFormComponent implements OnInit {
 
       constructor(private fb: FormBuilder) {}
       submitForm() {
+            this.authForm.disable();
             this.emitAuthForm.emit(this.authForm.value);
       }
 

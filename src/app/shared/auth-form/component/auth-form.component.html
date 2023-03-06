@@ -76,7 +76,7 @@
             <button
                   class="modal-action btn waves-effect"
                   type="submit"
-                  [disabled]="!authForm.valid"
+                  [disabled]="!authForm.valid || authForm.disabled"
                   >{{ buttonTitleProps }}</button
             >
       </div>

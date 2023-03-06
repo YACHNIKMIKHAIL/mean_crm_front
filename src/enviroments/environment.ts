@@ -1,4 +1,4 @@
 export const environment = {
       production: false,
-      baseCrmUrl: "/crm/auth",
+      urls: { auth: "/crm/auth" },
 };

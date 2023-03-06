@@ -52,6 +52,10 @@ export class LoginComponent implements OnInit, OnDestroy {
                               this.materialService.toast(
                                     "To get started, log in to the system.",
                               );
+                        } else if (params["sessionFailed"]) {
+                              this.materialService.toast(
+                                    "Your session has ended, please login again.",
+                              );
                         }
                   },
             );

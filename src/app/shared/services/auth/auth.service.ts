@@ -17,7 +17,7 @@ export class AuthService {
       login(payload: UserInterface): Observable<{ token: string }> {
             return this.http
                   .post<{ token: string }>(
-                        `${environment.baseCrmUrl}/login`,
+                        `${environment.urls.auth}/login`,
                         payload,
                   )
                   .pipe(
@@ -29,7 +29,7 @@ export class AuthService {
 
       register(user: UserInterface): Observable<UserInterface> {
             return this.http.post<any>(
-                  `${environment.baseCrmUrl}/register`,
+                  `${environment.urls.auth}/register`,
                   user,
             );
       }

@@ -34,11 +34,11 @@ export class AuthFormComponent implements OnInit {
 
       ngOnInit(): void {
             this.authForm = this.fb.group({
-                  email: new FormControl("", [
+                  email: new FormControl(null, [
                         Validators.required,
                         Validators.email,
                   ]),
-                  password: new FormControl("", [
+                  password: new FormControl(null, [
                         Validators.required,
                         Validators.minLength(this.requiredPasswordLength),
                   ]),

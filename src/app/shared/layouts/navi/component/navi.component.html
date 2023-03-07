@@ -1,22 +1,40 @@
 <ul class="sidenav sidenav-fixed a-sidenav">
       <h4>Newborn</h4>
-      <li class="bold active"
-            ><a href="#" class="waves-effect waves-orange">Review</a></li
-      >
-      <li class="bold"
-            ><a href="#" class="waves-effect waves-orange">Analytics</a></li
-      >
-      <li class="bold"
-            ><a href="#" class="waves-effect waves-orange">Story</a></li
-      >
-      <li class="bold"
-            ><a href="#" class="waves-effect waves-orange">Add order</a></li
-      >
-      <li class="bold"
-            ><a href="#" class="waves-effect waves-orange">Range</a></li
+      <li
+            class="bold"
+            *ngFor="let item of linksList"
+            [routerLink]="item.path"
+            [routerLinkActive]="'active'"
+            [routerLinkActiveOptions]="{ exact: true }"
+            ><a class="waves-effect waves-orange">{{ item.title }}</a></li
       >
       <li class="bold last"
-            ><a href="#" class="waves-effect waves-orange">Exit</a></li
+            ><a
+                  [routerLink]="routerPathsEnum.LOGIN"
+                  (click)="logout()"
+                  class="waves-effect waves-orange"
+                  >Exit</a
+            ></li
       >
 </ul>
 <router-outlet></router-outlet>
+
+<div class="fixed-action-btn">
+      <a class="btn-floating btn-large red">
+            <i class="large material-icons">add</i>
+      </a>
+      <ul>
+            <li
+                  ><a class="btn-floating green"
+                        ><i class="material-icons">assignment</i></a
+                  ></li
+            >
+            <li
+                  ><a class="btn-floating blue"
+                        ><i class="material-icons">list</i></a
+                  ></li
+            >
+      </ul>
+      <!--  <script src="scripts/materialize.min.js"></script>-->
+      <!--  <script src="scripts/scripts.js"></script>-->
+</div>

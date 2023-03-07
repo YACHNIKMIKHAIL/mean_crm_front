@@ -9,6 +9,7 @@ import { NaviModule } from "./shared/layouts/navi/navi.module";
 import { RegisterModule } from "./modules/register/register.module";
 import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
 import { TokenInterceptor } from "./shared/classes/token.interceptor";
+import { OverviewModule } from "./modules/overview/overview.module";
 
 @NgModule({
       declarations: [AppComponent],
@@ -20,6 +21,7 @@ import { TokenInterceptor } from "./shared/classes/token.interceptor";
             NaviModule,
             RegisterModule,
             HttpClientModule,
+            OverviewModule,
       ],
       providers: [
             {

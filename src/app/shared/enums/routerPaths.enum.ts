@@ -1,6 +1,16 @@
 export enum RouterPathsEnum {
       DEFAULT = "",
-      OVERVIEW = "overview",
       LOGIN = "login",
       REGISTER = "register",
+      OVERVIEW = "overview",
+      ANALYTICS = "analytics",
+      STORY = "story",
+      ORDER = "order",
+      RANGE = "categories",
 }
+
+// Review
+// Analytics
+// Story
+// Add order
+// Range

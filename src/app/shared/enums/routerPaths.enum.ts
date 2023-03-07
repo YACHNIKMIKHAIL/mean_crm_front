@@ -4,9 +4,9 @@ export enum RouterPathsEnum {
       REGISTER = "register",
       OVERVIEW = "overview",
       ANALYTICS = "analytics",
-      STORY = "story",
+      HISTORY = "history",
       ORDER = "order",
-      RANGE = "categories",
+      CATEGORIES = "categories",
 }
 
 // Review

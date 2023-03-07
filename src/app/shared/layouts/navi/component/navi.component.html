@@ -2,7 +2,10 @@
       <h4>Newborn</h4>
       <li
             class="bold"
-            *ngFor="let item of linksList"
+            *ngFor="
+                  let item of linksList;
+                  trackBy: trackByName
+            "
             [routerLink]="item.path"
             [routerLinkActive]="'active'"
             [routerLinkActiveOptions]="{ exact: true }"
@@ -20,7 +23,7 @@
 <router-outlet></router-outlet>
 
 <div class="fixed-action-btn">
-      <a class="btn-floating btn-large red">
+      <a class="btn-floating btn-large red" #layoutButton>
             <i class="large material-icons">add</i>
       </a>
       <ul>

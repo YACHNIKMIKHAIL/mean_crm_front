@@ -46,7 +46,7 @@ const routes: Routes = [
                         component: AnalyticsComponent,
                   },
                   {
-                        path: RouterPathsEnum.STORY,
+                        path: RouterPathsEnum.HISTORY,
                         component: StoryComponent,
                   },
                   {
@@ -54,7 +54,7 @@ const routes: Routes = [
                         component: OrderComponent,
                   },
                   {
-                        path: RouterPathsEnum.RANGE,
+                        path: RouterPathsEnum.CATEGORIES,
                         component: CategoriesComponent,
                   },
             ],

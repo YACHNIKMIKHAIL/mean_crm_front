@@ -59,7 +59,7 @@ const routes: Routes = [
                         component: CategoriesComponent,
                   },
                   {
-                        path: RouterPathsEnum.CATEGORIES_NEW,
+                        path: `${RouterPathsEnum.CATEGORIES}/${RouterPathsEnum.NEW}`,
                         component: AddNewCategoryComponent,
                   },
             ],

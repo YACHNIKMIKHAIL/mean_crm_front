@@ -44,7 +44,6 @@ export class TokenInterceptor implements HttpInterceptor {
       private handleAuthError(
             err: HttpErrorResponse,
       ): Observable<HttpResponse<HttpErrorResponse>> {
-            debugger;
             if (err.status === 401) {
                   this.router.navigate([RouterPathsEnum.LOGIN], {
                         queryParams: {

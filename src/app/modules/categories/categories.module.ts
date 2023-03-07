@@ -3,9 +3,10 @@ import { CommonModule } from "@angular/common";
 import { CategoriesComponent } from "./component/categories.component";
 import { RouterLink } from "@angular/router";
 import { AddNewCategoryComponent } from "./component/add-new-category/add-new-category.component";
+import { LoaderModule } from "../../shared/loader/loader.module";
 
 @NgModule({
       declarations: [CategoriesComponent, AddNewCategoryComponent],
-      imports: [CommonModule, RouterLink],
+      imports: [CommonModule, RouterLink, LoaderModule],
 })
 export class CategoriesModule {}

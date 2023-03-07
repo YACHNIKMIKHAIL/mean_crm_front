@@ -1,4 +1,5 @@
 import { Component } from "@angular/core";
+import { RouterPathsEnum } from "../../../shared/enums/routerPaths.enum";
 
 interface CategoryInterface {
       link: string;
@@ -17,6 +18,8 @@ export class CategoriesComponent {
             { link: "", title: "Category 4" },
             { link: "", title: "Category 5" },
       ];
+
+      routerPathsEnum = RouterPathsEnum;
 
       trackByLink(index: number, item: CategoryInterface) {
             return item.link;

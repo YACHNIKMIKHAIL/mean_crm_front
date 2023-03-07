@@ -11,6 +11,7 @@ import { AnalyticsComponent } from "./modules/analytics/component/analytics.comp
 import { CategoriesComponent } from "./modules/categories/component/categories.component";
 import { OrderComponent } from "./modules/order/component/order.component";
 import { HistoryComponent } from "./modules/history/component/history.component";
+import { AddNewCategoryComponent } from "./modules/categories/component/add-new-category/add-new-category.component";
 
 const routes: Routes = [
       {
@@ -56,6 +57,10 @@ const routes: Routes = [
                   {
                         path: RouterPathsEnum.CATEGORIES,
                         component: CategoriesComponent,
+                  },
+                  {
+                        path: RouterPathsEnum.CATEGORIES_NEW,
+                        component: AddNewCategoryComponent,
                   },
             ],
       },

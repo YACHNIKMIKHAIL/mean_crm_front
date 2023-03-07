@@ -7,6 +7,7 @@ export enum RouterPathsEnum {
       HISTORY = "history",
       ORDER = "order",
       CATEGORIES = "categories",
+      CATEGORIES_NEW = "categories/new",
 }
 
 // Review

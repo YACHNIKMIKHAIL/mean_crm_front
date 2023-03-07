@@ -5,7 +5,7 @@ import {
       FormGroup,
       Validators,
 } from "@angular/forms";
-import { UserInterface } from "../../interfaces/auth.interface";
+import { UserInterface } from "../../../interfaces/auth.interface";
 
 @Component({
       selector: "crm-auth-form",

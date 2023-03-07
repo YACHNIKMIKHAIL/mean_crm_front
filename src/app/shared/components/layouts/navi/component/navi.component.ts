@@ -1,8 +1,8 @@
 import { AfterViewInit, Component, ElementRef, ViewChild } from "@angular/core";
 import { NaviInterface } from "../navi.interface";
-import { RouterPathsEnum } from "../../../enums/routerPaths.enum";
-import { AuthService } from "../../../services/auth/auth.service";
-import { MaterialService } from "../../../classes/material.service";
+import { RouterPathsEnum } from "../../../../enums/routerPaths.enum";
+import { AuthService } from "../../../../services/auth/auth.service";
+import { MaterialService } from "../../../../classes/material.service";
 
 @Component({
       selector: "crm-navi",

@@ -1,7 +1,7 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
-import { HeaderComponent } from "./shared/layouts/header/component/header.component";
-import { NaviComponent } from "./shared/layouts/navi/component/navi.component";
+import { HeaderComponent } from "./shared/components/layouts/header/component/header.component";
+import { NaviComponent } from "./shared/components/layouts/navi/component/navi.component";
 import { LoginComponent } from "./modules/login/component/login.component";
 import { RegisterComponent } from "./modules/register/component/register.component";
 import { RouterPathsEnum } from "./shared/enums/routerPaths.enum";

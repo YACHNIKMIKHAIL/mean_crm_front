@@ -3,7 +3,7 @@ import { UserInterface } from "../../../shared/interfaces/auth.interface";
 import { AuthService } from "../../../shared/services/auth/auth.service";
 import { Subscription } from "rxjs";
 import { RouterPathsEnum } from "../../../shared/enums/routerPaths.enum";
-import { AuthFormComponent } from "../../../shared/auth-form/component/auth-form.component";
+import { AuthFormComponent } from "../../../shared/components/auth-form/component/auth-form.component";
 import { Router } from "@angular/router";
 import { MaterialService } from "../../../shared/classes/material.service";
 

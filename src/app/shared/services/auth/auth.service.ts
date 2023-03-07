@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { UserInterface } from "../../interfaces/auth.types";
+import { UserInterface } from "../../interfaces/auth.interface";
 import { Observable, tap } from "rxjs";
 import { SavingToLocalStorageService } from "../savingToLocalStorage/saving-to-local-storage.service";
 import { environment } from "../../../../enviroments/environment";

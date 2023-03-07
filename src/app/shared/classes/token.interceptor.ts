@@ -26,7 +26,7 @@ export class TokenInterceptor implements HttpInterceptor {
       ): Observable<HttpEvent<any>> {
             if (this.authService.isAuthenticated()) {
                   const token =
-                        this.savingToLocalStorageService.getToken() as string;
+                        this.savingToLocalStorageService.getToken() || "";
                   req = req.clone({
                         headers: req.headers.set("Authorization", token),
                   });

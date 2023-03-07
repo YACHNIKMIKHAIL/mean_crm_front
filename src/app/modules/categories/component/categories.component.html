@@ -10,22 +10,27 @@
 
       <div class="row">
             <div class="col s12">
-                  <crm-loader></crm-loader>
-                  <div
-                        class="collection"
-                        *ngIf="categoriesList.length; else noCategories">
-                        <a
-                              *ngFor="
-                                    let category of categoriesList;
-                                    trackBy: trackByLink
-                              "
-                              [href]="category.link"
-                              class="collection-item"
-                              >{{ category.title }}</a
-                        >
-                  </div>
-                  <ng-template #noCategories>
-                        You haven't categories
+                  <ng-container *ngIf="!isLoading; else loading">
+                        <ng-container
+                              *ngIf="categoriesList?.length; else noCategories">
+                              <div class="collection">
+                                    <a
+                                          *ngFor="
+                                                let category of categoriesList;
+                                                trackBy: trackById
+                                          "
+                                          [href]="category.user"
+                                          class="collection-item"
+                                          >{{ category.name }}</a
+                                    >
+                              </div>
+                        </ng-container>
+                        <ng-template #noCategories>
+                              You haven't categories
+                        </ng-template>
+                  </ng-container>
+                  <ng-template #loading>
+                        <crm-loader></crm-loader>
                   </ng-template>
             </div>
       </div>

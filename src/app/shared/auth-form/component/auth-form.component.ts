@@ -5,7 +5,7 @@ import {
       FormGroup,
       Validators,
 } from "@angular/forms";
-import { UserInterface } from "../../interfaces/auth.types";
+import { UserInterface } from "../../interfaces/auth.interface";
 
 @Component({
       selector: "crm-auth-form",
@@ -18,7 +18,7 @@ export class AuthFormComponent implements OnInit {
       @Output() emitAuthForm = new EventEmitter<UserInterface>();
       authForm!: FormGroup;
 
-      requiredPasswordLength = 6;
+      requiredPasswordLength = 3;
 
       emailIsValid(): boolean {
             return (

@@ -1,5 +1,5 @@
 import { Component, OnDestroy, ViewChild } from "@angular/core";
-import { UserInterface } from "../../../shared/interfaces/auth.types";
+import { UserInterface } from "../../../shared/interfaces/auth.interface";
 import { AuthService } from "../../../shared/services/auth/auth.service";
 import { Subscription } from "rxjs";
 import { RouterPathsEnum } from "../../../shared/enums/routerPaths.enum";

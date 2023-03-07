@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit, ViewChild } from "@angular/core";
-import { UserInterface } from "../../../shared/interfaces/auth.types";
+import { UserInterface } from "../../../shared/interfaces/auth.interface";
 import { AuthService } from "../../../shared/services/auth/auth.service";
 import { AuthFormComponent } from "../../../shared/auth-form/component/auth-form.component";
 import { ActivatedRoute, Params, Router } from "@angular/router";

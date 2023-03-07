@@ -5,10 +5,10 @@ import { Injectable } from "@angular/core";
 })
 export class SavingToLocalStorageService {
       saveToken(token: string | null) {
-            localStorage.setItem("crm-auth-token", JSON.stringify(token));
+            localStorage.setItem("crm-auth-token", token as string);
       }
 
       getToken() {
-            return localStorage.getItem("crm-auth-token") || null;
+            return localStorage.getItem("crm-auth-token");
       }
 }

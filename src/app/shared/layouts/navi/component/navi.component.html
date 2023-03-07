@@ -2,10 +2,7 @@
       <h4>Newborn</h4>
       <li
             class="bold"
-            *ngFor="
-                  let item of linksList;
-                  trackBy: trackByName
-            "
+            *ngFor="let item of linksList; trackBy: trackByName"
             [routerLink]="item.path"
             [routerLinkActive]="'active'"
             [routerLinkActiveOptions]="{ exact: true }"
@@ -22,8 +19,8 @@
 </ul>
 <router-outlet></router-outlet>
 
-<div class="fixed-action-btn">
-      <a class="btn-floating btn-large red" #layoutButton>
+<div class="fixed-action-btn" #floatingB>
+      <a class="btn-floating btn-large red">
             <i class="large material-icons">add</i>
       </a>
       <ul>
@@ -38,6 +35,4 @@
                   ></li
             >
       </ul>
-      <!--  <script src="scripts/materialize.min.js"></script>-->
-      <!--  <script src="scripts/scripts.js"></script>-->
 </div>

@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ViewChild } from "@angular/core";
+import { AfterViewInit, Component, ElementRef, ViewChild } from "@angular/core";
 import { NaviInterface } from "../navi.interface";
 import { RouterPathsEnum } from "../../../enums/routerPaths.enum";
 import { AuthService } from "../../../services/auth/auth.service";
@@ -11,7 +11,7 @@ import { MaterialService } from "../../../classes/material.service";
 })
 export class NaviComponent implements AfterViewInit {
       routerPathsEnum = RouterPathsEnum;
-      @ViewChild("layoutButton") layoutButton!: HTMLElement;
+      @ViewChild("floatingB") floatingRef!: ElementRef;
       constructor(
             private authService: AuthService,
             private materialService: MaterialService,
@@ -29,11 +29,11 @@ export class NaviComponent implements AfterViewInit {
       }
 
       ngAfterViewInit(): void {
-            console.log(this.layoutButton);
-            this.materialService.initializeFloatingButton(this.layoutButton);
+            console.log(this.floatingRef);
+            this.materialService.initializeFloatingButton(this.floatingRef);
       }
 
-      trackByName(index: number, item: NaviInterface):string {
+      trackByName(index: number, item: NaviInterface): string {
             return item.title;
       }
 }

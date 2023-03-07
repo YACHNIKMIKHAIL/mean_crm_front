@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { ElementRef, Injectable } from "@angular/core";
 declare var M: any;
 
 @Injectable({
@@ -11,7 +11,8 @@ export class MaterialService {
             M.toast({ html: message });
       }
 
-      initializeFloatingButton(elem: HTMLElement) {
-            M.FloatingActionButton.init(elem, {});
+      initializeFloatingButton(elemRef: ElementRef) {
+            console.log("initializeFloatingButton", elemRef.nativeElement);
+            M.FloatingActionButton.init(elemRef.nativeElement);
       }
 }

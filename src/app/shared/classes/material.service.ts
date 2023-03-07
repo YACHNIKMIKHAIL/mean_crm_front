@@ -12,7 +12,6 @@ export class MaterialService {
       }
 
       initializeFloatingButton(elemRef: ElementRef) {
-            console.log("initializeFloatingButton", elemRef.nativeElement);
             M.FloatingActionButton.init(elemRef.nativeElement);
       }
 }

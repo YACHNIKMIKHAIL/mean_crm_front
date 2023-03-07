@@ -10,7 +10,7 @@ import { OverviewComponent } from "./modules/overview/component/overview.compone
 import { AnalyticsComponent } from "./modules/analytics/component/analytics.component";
 import { CategoriesComponent } from "./modules/categories/component/categories.component";
 import { OrderComponent } from "./modules/order/component/order.component";
-import { StoryComponent } from "./modules/story/component/story.component";
+import { HistoryComponent } from "./modules/history/component/history.component";
 
 const routes: Routes = [
       {
@@ -47,7 +47,7 @@ const routes: Routes = [
                   },
                   {
                         path: RouterPathsEnum.HISTORY,
-                        component: StoryComponent,
+                        component: HistoryComponent,
                   },
                   {
                         path: RouterPathsEnum.ORDER,

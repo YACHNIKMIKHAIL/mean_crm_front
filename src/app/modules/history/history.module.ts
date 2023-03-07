@@ -1,9 +1,9 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { StoryComponent } from "./component/story.component";
+import { HistoryComponent } from "./component/history.component";
 
 @NgModule({
-      declarations: [StoryComponent],
+      declarations: [HistoryComponent],
       imports: [CommonModule],
 })
-export class StoryModule {}
+export class HistoryModule {}

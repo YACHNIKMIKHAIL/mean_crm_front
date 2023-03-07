@@ -10,6 +10,9 @@ import { RegisterModule } from "./modules/register/register.module";
 import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
 import { TokenInterceptor } from "./shared/classes/token.interceptor";
 import { OverviewModule } from "./modules/overview/overview.module";
+import { OrderModule } from "./modules/order/order.module";
+import { CategoriesModule } from "./modules/categories/categories.module";
+import { HistoryModule } from "./modules/history/history.module";
 
 @NgModule({
       declarations: [AppComponent],
@@ -22,6 +25,9 @@ import { OverviewModule } from "./modules/overview/overview.module";
             RegisterModule,
             HttpClientModule,
             OverviewModule,
+            OrderModule,
+            CategoriesModule,
+            HistoryModule,
       ],
       providers: [
             {

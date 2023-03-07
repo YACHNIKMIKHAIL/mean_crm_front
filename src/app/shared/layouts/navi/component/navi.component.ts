@@ -12,10 +12,6 @@ import { MaterialService } from "../../../classes/material.service";
 export class NaviComponent implements AfterViewInit {
       routerPathsEnum = RouterPathsEnum;
       @ViewChild("floatingB") floatingRef!: ElementRef;
-      constructor(
-            private authService: AuthService,
-            private materialService: MaterialService,
-      ) {}
       linksList: NaviInterface[] = [
             { path: RouterPathsEnum.OVERVIEW, title: "Review" },
             { path: RouterPathsEnum.ANALYTICS, title: "Analytics" },
@@ -23,13 +19,16 @@ export class NaviComponent implements AfterViewInit {
             { path: RouterPathsEnum.ORDER, title: "Add order" },
             { path: RouterPathsEnum.CATEGORIES, title: "Categories" },
       ];
+      constructor(
+            private authService: AuthService,
+            private materialService: MaterialService,
+      ) {}
 
       logout() {
             this.authService.logout();
       }
 
       ngAfterViewInit(): void {
-            console.log(this.floatingRef);
             this.materialService.initializeFloatingButton(this.floatingRef);
       }
 

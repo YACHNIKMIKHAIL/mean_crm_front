@@ -11,8 +11,7 @@ import { AnalyticsComponent } from "./modules/analytics/component/analytics.comp
 import { CategoriesComponent } from "./modules/categories/components/categories.component";
 import { OrderComponent } from "./modules/order/component/order.component";
 import { HistoryComponent } from "./modules/history/component/history.component";
-import { AddNewCategoryComponent } from "./modules/categories/components/add-new-category/add-new-category.component";
-import { CurrentCategoryComponent } from "./modules/categories/components/current-category/current-category.component";
+import { CategoryForm } from "./modules/categories/components/category-form/category-form";
 
 const routes: Routes = [
       {
@@ -61,11 +60,11 @@ const routes: Routes = [
                   },
                   {
                         path: `${RouterPathsEnum.CATEGORIES}/${RouterPathsEnum.NEW}`,
-                        component: AddNewCategoryComponent,
+                        component: CategoryForm,
                   },
                   {
                         path: `${RouterPathsEnum.CATEGORIES}/${RouterPathsEnum.ID}`,
-                        component: CurrentCategoryComponent,
+                        component: CategoryForm,
                   },
             ],
       },

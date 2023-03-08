@@ -9,7 +9,10 @@
                   {{isNew?'Add':'Update'}} category
             </h4>
             <span>
-                  <button class="btn btn-small red">
+                  <button
+                        class="btn btn-small red"
+                        (click)="removeCategory()"
+                        [disabled]="isNew">
                         <i class="material-icons">delete</i>
                   </button>
             </span>
@@ -22,7 +25,6 @@
                   class="col s12 l6">
                   <div class="input-field">
                         <input
-                              #inputEl
                               id="name"
                               type="text"
                               [formControlName]="'name'"

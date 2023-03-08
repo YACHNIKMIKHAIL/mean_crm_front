@@ -34,4 +34,10 @@ export class CategoriesService {
                   { name },
             );
       }
+
+      removeCategory(id: string): Observable<{ message: string }> {
+            return this.http.delete<{ message: string }>(
+                  `${environment.urls.categories}/${id}`,
+            );
+      }
 }

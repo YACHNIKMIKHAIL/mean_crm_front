@@ -12,10 +12,8 @@ import { FormGroup } from "@angular/forms";
       styleUrls: ["./category-form.css"],
 })
 export class CategoryForm implements OnInit, OnDestroy {
-      category: CategoryInterface = {
-            name: "",
-            imageSrc: "",
-      };
+      category?: CategoryInterface;
+      isNew = true;
       categorySubscription = new Subscription();
       categoryForm!: FormGroup;
       routerPathsEnum = RouterPathsEnum;
@@ -26,14 +24,19 @@ export class CategoryForm implements OnInit, OnDestroy {
       ) {}
 
       ngOnInit(): void {
-            const id = this.route.snapshot.params["id"];
-            if (id) {
-                  this.categorySubscription = this.categoriesService
-                        .getCurrentCategory(id)
-                        .subscribe(category => {
-                              this.category = category;
-                        });
-            }
+            // const id = this.route.snapshot.params["id"];
+            // if (id) {
+            //       this.categorySubscription = this.categoriesService
+            //             .getCurrentCategory(id)
+            //             .subscribe(category => {
+            //                   this.category = category;
+            //             });
+            // }
+            this.route.params.subscribe(params => {
+                  if (params["id"]) {
+                        this.isNew = false;
+                  }
+            });
       }
 
       ngOnDestroy(): void {

@@ -2,9 +2,11 @@
       <div class="page-title">
             {{category|json}}
             <h4>
-                  <a [routerLink]="'/categories'">Categories</a>
+                  <a [routerLink]="['/',routerPathsEnum.CATEGORIES]"
+                        >Categories</a
+                  >
                   <i class="material-icons">keyboard_arrow_right</i>
-                  Add category
+                  {{isNew?'Add':'Update'}} category
             </h4>
             <span>
                   <button class="btn btn-small red">
@@ -36,14 +38,20 @@
             </div>
 
             <div class="col s12 l4 center">
-                  <ng-container *ngIf="category.imageSrc; else noImage">
-                        <img
-                              class="responsive-img"
-                              style="height: 200px"
-                              [src]="category.imageSrc"
-                              alt="image" />
+                  <ng-container *ngIf="!isNew; else addImage">
+                        <ng-container
+                              *ngIf="category?.imageSrc||''; else noImage">
+                              <img
+                                    class="responsive-img"
+                                    style="height: 200px"
+                                    [src]="category?.imageSrc||''"
+                                    alt="image" />
+                        </ng-container>
+                        <ng-template #noImage>
+                              <i class="large material-icons">broken_image</i>
+                        </ng-template>
                   </ng-container>
-                  <ng-template #noImage>
+                  <ng-template #addImage>
                         <i class="large material-icons">add_a_photo</i>
                   </ng-template>
             </div>

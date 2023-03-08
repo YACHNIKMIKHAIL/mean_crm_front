@@ -1,0 +1,6 @@
+<main class="content" *ngIf="category | async as category">
+      name: {{ category.name }}; <br />
+      <img [src]="category.imageSrc" alt="image" /><br />
+      user?: {{ category.user || "no name" }};<br />
+      _id?:{{ category._id }};
+</main>

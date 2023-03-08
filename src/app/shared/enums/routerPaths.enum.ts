@@ -8,6 +8,7 @@ export enum RouterPathsEnum {
       ORDER = "order",
       CATEGORIES = "categories",
       NEW = "new",
+      ID = ":id",
 }
 
 // Review

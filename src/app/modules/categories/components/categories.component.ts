@@ -1,7 +1,7 @@
-import { Component, OnDestroy, OnInit } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { RouterPathsEnum } from "../../../shared/enums/routerPaths.enum";
 import { CategoriesService } from "../services/categories.service";
-import { Subscription } from "rxjs";
+import { delay, Observable } from "rxjs";
 import { CategoryInterface } from "../../../shared/interfaces/category.interface";
 
 @Component({
@@ -9,11 +9,8 @@ import { CategoryInterface } from "../../../shared/interfaces/category.interface
       templateUrl: "./categories.component.html",
       styleUrls: ["./categories.component.css"],
 })
-export class CategoriesComponent implements OnInit, OnDestroy {
-      categoriesList!: CategoryInterface[];
-      categoriesListSubscription!: Subscription;
-      isLoading = true;
-
+export class CategoriesComponent implements OnInit {
+      categoriesList$!: Observable<CategoryInterface[]>;
       routerPathsEnum = RouterPathsEnum;
 
       constructor(private categoriesService: CategoriesService) {}
@@ -23,15 +20,8 @@ export class CategoriesComponent implements OnInit, OnDestroy {
       }
 
       ngOnInit(): void {
-            this.categoriesListSubscription = this.categoriesService
+            this.categoriesList$ = this.categoriesService
                   .getAllCategories()
-                  .subscribe(categories => {
-                        this.categoriesList = categories;
-                        this.isLoading = false;
-                  });
-      }
-
-      ngOnDestroy(): void {
-            this.categoriesListSubscription.unsubscribe();
+                  .pipe(delay(1500));
       }
 }

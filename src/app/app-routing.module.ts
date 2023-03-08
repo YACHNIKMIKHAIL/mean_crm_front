@@ -8,10 +8,11 @@ import { RouterPathsEnum } from "./shared/enums/routerPaths.enum";
 import { AuthGuard } from "./shared/classes/auth.guard";
 import { OverviewComponent } from "./modules/overview/component/overview.component";
 import { AnalyticsComponent } from "./modules/analytics/component/analytics.component";
-import { CategoriesComponent } from "./modules/categories/component/categories.component";
+import { CategoriesComponent } from "./modules/categories/components/categories.component";
 import { OrderComponent } from "./modules/order/component/order.component";
 import { HistoryComponent } from "./modules/history/component/history.component";
-import { AddNewCategoryComponent } from "./modules/categories/component/add-new-category/add-new-category.component";
+import { AddNewCategoryComponent } from "./modules/categories/components/add-new-category/add-new-category.component";
+import { CurrentCategoryComponent } from "./modules/categories/components/current-category/current-category.component";
 
 const routes: Routes = [
       {
@@ -61,6 +62,10 @@ const routes: Routes = [
                   {
                         path: `${RouterPathsEnum.CATEGORIES}/${RouterPathsEnum.NEW}`,
                         component: AddNewCategoryComponent,
+                  },
+                  {
+                        path: `${RouterPathsEnum.CATEGORIES}/${RouterPathsEnum.ID}`,
+                        component: CurrentCategoryComponent,
                   },
             ],
       },

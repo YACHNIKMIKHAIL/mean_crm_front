@@ -15,4 +15,10 @@ export class CategoriesService {
                   environment.urls.categories,
             );
       }
+
+      getCurrentCategory(id: string): Observable<CategoryInterface> {
+            return this.http.get<CategoryInterface>(
+                  `${environment.urls.categories}/${id}`,
+            );
+      }
 }

@@ -10,23 +10,29 @@
 
       <div class="row">
             <div class="col s12">
-                  <ng-container *ngIf="!isLoading; else loading">
-                        <ng-container
-                              *ngIf="categoriesList?.length; else noCategories">
+                  <ng-container
+                        *ngIf="
+                              categoriesList$ | async as categories;
+                              else loading
+                        ">
+                        <ng-container *ngIf="categories.length; else empty">
                               <div class="collection">
                                     <a
                                           *ngFor="
-                                                let category of categoriesList;
+                                                let category of categories;
                                                 trackBy: trackById
                                           "
-                                          [href]="category.user"
+                                          [routerLink]="[category._id]"
                                           class="collection-item"
                                           >{{ category.name }}</a
                                     >
                               </div>
                         </ng-container>
-                        <ng-template #noCategories>
-                              You haven't categories
+                        <ng-template #empty>
+                              <span class="valign-wrapper">
+                                    You haven't categories
+                                    <i class="material-icons">shopping_cart</i>
+                              </span>
                         </ng-template>
                   </ng-container>
                   <ng-template #loading>

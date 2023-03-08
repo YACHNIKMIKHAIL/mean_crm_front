@@ -8,7 +8,7 @@ import { RouterPathsEnum } from "../../../shared/enums/routerPaths.enum";
 import { MaterialService } from "../../../shared/classes/material.service";
 
 @Component({
-      selector: "crm-component",
+      selector: "crm-current-category",
       templateUrl: "./login.component.html",
       styleUrls: ["./login.component.css"],
 })
@@ -54,7 +54,7 @@ export class LoginComponent implements OnInit, OnDestroy {
                               );
                         } else if (params["sessionFailed"]) {
                               this.materialService.toast(
-                                    "Your session has ended, please component again.",
+                                    "Your session has ended, please current-category again.",
                               );
                         }
                   },

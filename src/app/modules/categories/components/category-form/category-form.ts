@@ -6,7 +6,7 @@ import {
       ViewChild,
 } from "@angular/core";
 import { RouterPathsEnum } from "../../../../shared/enums/routerPaths.enum";
-import { Subscription } from "rxjs";
+import { Subject, takeUntil } from "rxjs";
 import { CategoryInterface } from "../../../../shared/interfaces/category.interface";
 import { CategoriesService } from "../../services/categories.service";
 import { ActivatedRoute } from "@angular/router";
@@ -19,9 +19,10 @@ import { FormControl, FormGroup, Validators } from "@angular/forms";
 })
 export class CategoryForm implements OnInit, OnDestroy {
       category?: CategoryInterface;
+      categoryId?: string;
       isNew = true;
-      categorySubscription = new Subscription();
       categoryForm!: FormGroup;
+      isAlive = new Subject<void>();
       routerPathsEnum = RouterPathsEnum;
       @ViewChild("inputEl") inputEl!: ElementRef;
 
@@ -35,8 +36,10 @@ export class CategoryForm implements OnInit, OnDestroy {
             this.route.params.subscribe(params => {
                   if (params["id"]) {
                         this.isNew = false;
-                        this.categorySubscription = this.categoriesService
+                        this.categoryId = params["id"];
+                        this.categoriesService
                               .getCurrentCategory(params["id"])
+                              .pipe(takeUntil(this.isAlive))
                               .subscribe(category => {
                                     this.categoryForm
                                           .get("name")
@@ -48,14 +51,34 @@ export class CategoryForm implements OnInit, OnDestroy {
       }
 
       ngOnDestroy(): void {
-            this.categorySubscription.unsubscribe();
+            this.isAlive.next();
+            this.isAlive.complete();
       }
 
       private initializeForm() {
             this.categoryForm = new FormGroup({
-                  name: new FormControl(null, [Validators.required]),
+                  name: new FormControl(null, [
+                        Validators.required,
+                        Validators.minLength(5),
+                  ]),
             });
       }
 
-      submitForm() {}
+      submitForm() {
+            console.log(this.categoryForm.get("name")?.value);
+            if (this.isNew) {
+                  this.categoriesService
+                        .createCategory(this.categoryForm.get("name")?.value)
+                        .pipe(takeUntil(this.isAlive))
+                        .subscribe();
+            } else if (!this.isNew && this.categoryId) {
+                  this.categoriesService
+                        .updateCategory(
+                              this.categoryForm.get("name")?.value,
+                              this.categoryId,
+                        )
+                        .pipe(takeUntil(this.isAlive))
+                        .subscribe();
+            }
+      }
 }

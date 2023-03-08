@@ -21,4 +21,17 @@ export class CategoriesService {
                   `${environment.urls.categories}/${id}`,
             );
       }
+
+      createCategory(name: string): Observable<CategoryInterface> {
+            return this.http.post<CategoryInterface>(
+                  environment.urls.categories,
+                  { name },
+            );
+      }
+      updateCategory(name: string, id: string): Observable<CategoryInterface> {
+            return this.http.patch<CategoryInterface>(
+                  `${environment.urls.categories}/${id}`,
+                  { name },
+            );
+      }
 }

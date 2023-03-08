@@ -84,5 +84,7 @@
             </div>
       </div>
 
-      <crm-positions-form></crm-positions-form>
+      <ng-container *ngIf="!isNew">
+            <crm-positions-form [categoryId]="categoryId"></crm-positions-form>
+      </ng-container>
 </main>

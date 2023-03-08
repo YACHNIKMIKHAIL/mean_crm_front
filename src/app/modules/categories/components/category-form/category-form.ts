@@ -80,11 +80,15 @@ export class CategoryForm implements OnInit, OnDestroy {
                   this.categoriesService
                         .createCategory(categoryName)
                         .pipe(takeUntil(this.isAlive))
-                        .subscribe(() => {
+                        .subscribe(newCat => {
                               this.initializeForm();
                               this.materialService.toast(
                                     "Category was created.",
                               );
+                              this.router.navigate([
+                                    this.routerPathsEnum.CATEGORIES,
+                                    newCat._id,
+                              ]);
                         });
             } else if (!this.isNew && this.categoryId) {
                   this.categoriesService

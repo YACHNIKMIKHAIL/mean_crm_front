@@ -16,14 +16,22 @@
       </div>
 
       <div class="row">
-            <div class="col s12 l6">
+            <form
+                  [formGroup]="categoryForm"
+                  (ngSubmit)="submitForm()"
+                  class="col s12 l6">
                   <div class="input-field">
-                        <input id="name" type="text" />
+                        <input
+                              #inputEl
+                              id="name"
+                              type="text"
+                              [formControlName]="'name'" />
                         <label for="name">Name</label>
                   </div>
 
                   <div>
                         <button
+                              [disabled]="categoryForm.controls['name'].invalid"
                               class="waves-effect waves-light btn orange lighten-2 mb2">
                               <i class="material-icons left">backup</i>
                               Upload Image
@@ -31,11 +39,13 @@
                   </div>
 
                   <div>
-                        <button class="waves-effect waves-light btn">
+                        <button
+                              class="waves-effect waves-light btn"
+                              [disabled]="categoryForm.invalid">
                               Save Changes
                         </button>
                   </div>
-            </div>
+            </form>
 
             <div class="col s12 l4 center">
                   <ng-container *ngIf="!isNew; else addImage">

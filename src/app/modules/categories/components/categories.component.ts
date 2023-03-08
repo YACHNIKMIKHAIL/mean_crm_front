@@ -22,6 +22,6 @@ export class CategoriesComponent implements OnInit {
       ngOnInit(): void {
             this.categoriesList$ = this.categoriesService
                   .getAllCategories()
-                  .pipe(delay(1500));
+                  .pipe(delay(800));
       }
 }

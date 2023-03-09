@@ -1,21 +1,24 @@
-<ng-container *ngIf="!!(positions$ | async); else loader">
-      <div class="row">
-            <div class="col s12">
-                  <div class="page-subtitle">
-                        <h4>Positions:</h4>
-                        <button
-                              class="waves-effect waves-light btn grey darken-1 btn-small modal-trigger"
-                              data-target="create-modal">
-                              Add position
-                        </button>
-                  </div>
-
+<div class="row">
+      <div class="col s12">
+            <div class="page-subtitle">
+                  <h4>Positions:</h4>
+                  <button
+                        [disabled]="!(positions$ | async)"
+                        class="waves-effect waves-light btn grey darken-1 btn-small modal-trigger"
+                        data-target="create-modal">
+                        Add position
+                  </button>
+            </div>
+            <ng-container *ngIf="!!(positions$ | async); else loader">
                   <ng-container
                         *ngIf="(positions$ | async)?.length; else noPositions">
-                        <div
-                              class="collection"
-                              *ngFor="let position of positions$ | async">
-                              <a class="collection-item collection-item-icon">
+                        <div class="collection">
+                              <a
+                                    class="collection-item collection-item-icon"
+                                    *ngFor="
+                                          let position of positions$ | async;
+                                          trackBy: trackById
+                                    ">
                                     <span>
                                           {{ position.name }}
                                           <strong>{{ position.cost }} $</strong>
@@ -27,11 +30,15 @@
                         </div>
                   </ng-container>
                   <ng-template #noPositions>
-                        <i class="large material-icons">move_to_inbox</i>
+                        <span class="valign-wrapper">
+                              <i class="material-icons">move_to_inbox</i>
+                              No any positions in category
+                        </span>
                   </ng-template>
-            </div>
+            </ng-container>
       </div>
-</ng-container>
+</div>
+
 <ng-template #loader>
       <crm-loader></crm-loader>
 </ng-template>

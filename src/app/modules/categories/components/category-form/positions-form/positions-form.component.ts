@@ -1,13 +1,8 @@
 import { Component, Input, OnInit } from "@angular/core";
 import { Observable, of } from "rxjs";
 import { PositionsService } from "../../../../../shared/services/positions/positions.service";
+import { PositionInterface } from "../../../../../shared/interfaces/position.interface";
 
-export interface PositionInterface {
-      name: string;
-      cost: number;
-      category: string;
-      user: string;
-}
 @Component({
       selector: "crm-positions-form",
       templateUrl: "./positions-form.component.html",
@@ -25,5 +20,9 @@ export class PositionsFormComponent implements OnInit {
                         this.categoryIdProps,
                   );
             }
+      }
+
+      trackById(index: number, item: PositionInterface) {
+            return item._id;
       }
 }

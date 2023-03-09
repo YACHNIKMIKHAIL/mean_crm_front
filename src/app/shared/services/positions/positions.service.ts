@@ -15,4 +15,17 @@ export class PositionsService {
                   `${environment.urls.position}/${categoryId}`,
             );
       }
+
+      createPosition(
+            name: string,
+            cost: number,
+            categoryId: string,
+      ): Observable<PositionInterface[]> {
+            //name, cost, category
+            const body = { name, cost, category: categoryId };
+            return this.http.post<PositionInterface[]>(
+                  environment.urls.position,
+                  body,
+            );
+      }
 }

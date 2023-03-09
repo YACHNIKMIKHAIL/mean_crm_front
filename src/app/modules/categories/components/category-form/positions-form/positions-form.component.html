@@ -44,16 +44,53 @@
       <crm-loader></crm-loader>
 </ng-template>
 
-<div #modal class="modal">
+<form
+      [formGroup]="addPositionForm"
+      (ngSubmit)="submitPosition()"
+      #modal
+      class="modal">
       <div class="modal-content">
             <h4 class="mb1">Add position</h4>
             <div class="input-field">
-                  <input id="pos-name" type="text" required />
+                  <input
+                        id="pos-name"
+                        type="text"
+                        [formControlName]="'posName'"
+                        [ngClass]="{
+                              invalid:
+                                    addPositionForm.get('posName')?.invalid &&
+                                    addPositionForm.get('posName')?.touched
+                        }" />
                   <label for="pos-name">Name</label>
+                  <span
+                        class="helper-text red-text"
+                        *ngIf="
+                              addPositionForm.get('posName')?.invalid &&
+                              addPositionForm.get('posName')?.touched
+                        "
+                        >Required field.</span
+                  >
             </div>
             <div class="input-field">
-                  <input id="pos-cost" type="text" required />
+                  <input
+                        id="pos-cost"
+                        type="number"
+                        min="0"
+                        [formControlName]="'posCost'"
+                        [ngClass]="{
+                              invalid:
+                                    addPositionForm.get('posCost')?.invalid &&
+                                    addPositionForm.get('posCost')?.touched
+                        }" />
                   <label for="pos-cost">Price</label>
+                  <span
+                        class="helper-text red-text"
+                        *ngIf="
+                              addPositionForm.get('posCost')?.invalid &&
+                              addPositionForm.get('posCost')?.touched
+                        "
+                        >Required field.</span
+                  >
             </div>
       </div>
       <div class="modal-footer">
@@ -63,11 +100,8 @@
                   class="modal-action waves-effect waves-black btn-flat"
                   >Cancel</button
             >
-            <button
-                  type="submit"
-                  (click)="submitPosition()"
-                  class="modal-action btn waves-effect"
+            <button type="submit" class="modal-action btn waves-effect"
                   >Save</button
             >
       </div>
-</div>
+</form>

@@ -3,9 +3,9 @@
             <div class="page-subtitle">
                   <h4>Positions:</h4>
                   <button
+                        #addPosition
                         [disabled]="!(positions$ | async)"
-                        class="waves-effect waves-light btn grey darken-1 btn-small modal-trigger"
-                        data-target="create-modal">
+                        class="waves-effect waves-light btn grey darken-1 btn-small">
                         Add position
                   </button>
             </div>
@@ -18,7 +18,8 @@
                                     *ngFor="
                                           let position of positions$ | async;
                                           trackBy: trackById
-                                    ">
+                                    "
+                                    (click)="selectPosition(position)">
                                     <span>
                                           {{ position.name }}
                                           <strong>{{ position.cost }} $</strong>
@@ -43,7 +44,7 @@
       <crm-loader></crm-loader>
 </ng-template>
 
-<div id="create-modal" class="modal">
+<div #modal class="modal">
       <div class="modal-content">
             <h4 class="mb1">Add position</h4>
             <div class="input-field">
@@ -56,9 +57,17 @@
             </div>
       </div>
       <div class="modal-footer">
-            <a href="#!" class="modal-action waves-effect waves-black btn-flat"
-                  >Cancel</a
+            <button
+                  type="button"
+                  (click)="hideModal()"
+                  class="modal-action waves-effect waves-black btn-flat"
+                  >Cancel</button
             >
-            <button class="modal-action btn waves-effect">Save</button>
+            <button
+                  type="submit"
+                  (click)="submitPosition()"
+                  class="modal-action btn waves-effect"
+                  >Save</button
+            >
       </div>
 </div>

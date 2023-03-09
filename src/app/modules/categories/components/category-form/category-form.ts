@@ -157,7 +157,7 @@ export class CategoryForm implements OnInit, OnDestroy {
                                     () =>
                                           this.router.navigate([
                                                 this.routerPathsEnum.CATEGORIES,
-                                          ])
+                                          ]),
                               );
             }
       }

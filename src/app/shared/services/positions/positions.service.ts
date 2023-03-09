@@ -11,12 +11,7 @@ import { MessageInterface } from "../../interfaces/message.interface";
 export class PositionsService {
       constructor(private http: HttpClient) {}
 
-      createPosition(
-            categoryId: string,
-            name: string,
-            cost: number,
-      ): Observable<PositionInterface> {
-            const body = { name, cost, category: categoryId };
+      createPosition(body: PositionInterface): Observable<PositionInterface> {
             return this.http.post<PositionInterface>(
                   environment.urls.position,
                   body,

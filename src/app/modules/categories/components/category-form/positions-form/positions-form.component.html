@@ -14,6 +14,7 @@
                         *ngIf="(positions$ | async)?.length; else noPositions">
                         <div class="collection">
                               <a
+                                    (click)="selectPosition(position)"
                                     class="collection-item collection-item-icon"
                                     *ngFor="
                                           let position of positions$ | async;
@@ -23,26 +24,14 @@
                                           {{ position.name }}
                                           <strong>{{ position.cost }} $</strong>
                                     </span>
-                                    <span>
-                                          <span
-                                                class="mr15"
-                                                (click)="
-                                                      selectPosition(position)
-                                                ">
-                                                <i class="material-icons"
-                                                      >mode_edit</i
-                                                >
-                                          </span>
-                                          <span
-                                                (click)="
-                                                      removePosition(
-                                                            position._id || ''
-                                                      )
-                                                ">
-                                                <i class="material-icons"
-                                                      >delete</i
-                                                >
-                                          </span>
+                                    <span
+                                          (click)="
+                                                removePosition(
+                                                      position._id || '',
+                                                      $event
+                                                )
+                                          ">
+                                          <i class="material-icons">delete</i>
                                     </span>
                               </a>
                         </div>
@@ -50,7 +39,7 @@
                   <ng-template #noPositions>
                         <span class="valign-wrapper">
                               <i class="material-icons">move_to_inbox</i>
-                              No any positions in category
+                              No any positions in category.
                         </span>
                   </ng-template>
             </ng-container>
@@ -130,9 +119,15 @@
                   type="button"
                   (click)="hideModal()"
                   class="modal-action waves-effect waves-black btn-flat"
+                  [disabled]="addPositionForm.disabled"
                   >Cancel</button
             >
-            <button type="submit" class="modal-action btn waves-effect"
+            <button
+                  type="submit"
+                  class="modal-action btn waves-effect"
+                  [disabled]="
+                        addPositionForm.invalid || addPositionForm.disabled
+                  "
                   >Save</button
             >
       </div>

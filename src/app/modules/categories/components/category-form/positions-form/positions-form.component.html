@@ -72,18 +72,18 @@
                   <input
                         id="pos-name"
                         type="text"
-                        [formControlName]="'posName'"
+                        [formControlName]="'name'"
                         [ngClass]="{
                               invalid:
-                                    addPositionForm.get('posName')?.invalid &&
-                                    addPositionForm.get('posName')?.touched
+                                    addPositionForm.get('name')?.invalid &&
+                                    addPositionForm.get('name')?.touched
                         }" />
                   <label for="pos-name">Name</label>
                   <span
                         class="helper-text red-text"
                         *ngIf="
-                              addPositionForm.get('posName')?.invalid &&
-                              addPositionForm.get('posName')?.touched
+                              addPositionForm.get('name')?.invalid &&
+                              addPositionForm.get('name')?.touched
                         "
                         >Required field.</span
                   >
@@ -93,21 +93,36 @@
                         id="pos-cost"
                         type="number"
                         min="0"
-                        [formControlName]="'posCost'"
+                        [formControlName]="'cost'"
                         [ngClass]="{
                               invalid:
-                                    addPositionForm.get('posCost')?.invalid &&
-                                    addPositionForm.get('posCost')?.touched
+                                    addPositionForm.get('cost')?.invalid &&
+                                    addPositionForm.get('cost')?.touched
                         }" />
                   <label for="pos-cost">Price</label>
                   <span
                         class="helper-text red-text"
                         *ngIf="
-                              addPositionForm.get('posCost')?.invalid &&
-                              addPositionForm.get('posCost')?.touched
+                              addPositionForm.get('cost')?.invalid &&
+                              addPositionForm.get('cost')?.touched
                         "
-                        >Required field.</span
-                  >
+                        ><span
+                              *ngIf="
+                                    (addPositionForm.get('cost')?.errors)![
+                                          'required'
+                                    ]
+                              "
+                              >Required field.</span
+                        >
+                        <span
+                              *ngIf="
+                                    (addPositionForm.get('cost')?.errors)![
+                                          'min'
+                                    ]
+                              "
+                              >It will be more than 1.</span
+                        >
+                  </span>
             </div>
       </div>
       <div class="modal-footer">

@@ -16,7 +16,6 @@ export class PositionsService {
             name: string,
             cost: number,
       ): Observable<PositionInterface> {
-            //name, cost, category
             const body = { name, cost, category: categoryId };
             return this.http.post<PositionInterface>(
                   environment.urls.position,

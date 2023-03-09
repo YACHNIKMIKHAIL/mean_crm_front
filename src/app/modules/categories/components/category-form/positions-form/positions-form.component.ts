@@ -58,8 +58,11 @@ export class PositionsFormComponent
       }
       initializeForm() {
             this.addPositionForm = new FormGroup({
-                  posName: new FormControl(null, [Validators.required]),
-                  posCost: new FormControl(null, [Validators.required]),
+                  name: new FormControl(null, [Validators.required]),
+                  cost: new FormControl(null, [
+                        Validators.required,
+                        Validators.min(1),
+                  ]),
             });
       }
 
@@ -81,8 +84,8 @@ export class PositionsFormComponent
 
       selectPosition(position: PositionInterface) {
             this.addPositionForm.patchValue({
-                  posName: position.name,
-                  posCost: position.cost,
+                  name: position.name,
+                  cost: position.cost,
             });
             this.materialService.updateTextInput();
             this.modal?.open();
@@ -94,8 +97,8 @@ export class PositionsFormComponent
       }
 
       submitPosition() {
-            const name = this.addPositionForm.get("posName")?.value;
-            const cost = this.addPositionForm.get("posCost")?.value;
+            const name = this.addPositionForm.get("name")?.value;
+            const cost = this.addPositionForm.get("cost")?.value;
             let stream$ = of({} as PositionInterface);
             if (this.categoryIdProps && this.isUpdateMode) {
                   stream$ = this.positionsService

@@ -3,6 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { environment } from "../../../../enviroments/environment";
 import { CategoryInterface } from "../../../shared/interfaces/category.interface";
 import { Observable } from "rxjs";
+import { MessageInterface } from "../../../shared/interfaces/message.interface";
 
 @Injectable({
       providedIn: "root",
@@ -53,8 +54,8 @@ export class CategoriesService {
             );
       }
 
-      removeCategory(id: string): Observable<{ message: string }> {
-            return this.http.delete<{ message: string }>(
+      removeCategory(id: string): Observable<MessageInterface> {
+            return this.http.delete<MessageInterface>(
                   `${environment.urls.categories}/${id}`,
             );
       }

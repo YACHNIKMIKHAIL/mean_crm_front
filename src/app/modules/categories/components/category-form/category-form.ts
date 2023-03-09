@@ -6,7 +6,7 @@ import {
       ViewChild,
 } from "@angular/core";
 import { RouterPathsEnum } from "../../../../shared/enums/routerPaths.enum";
-import { of, Subject, switchMap, takeUntil } from "rxjs";
+import { fromEvent, of, Subject, switchMap, takeUntil } from "rxjs";
 import { CategoryInterface } from "../../../../shared/interfaces/category.interface";
 import { CategoriesService } from "../../services/categories.service";
 import { ActivatedRoute, Router } from "@angular/router";
@@ -28,6 +28,7 @@ export class CategoryForm implements OnInit, OnDestroy {
       imagePreview: string | ArrayBuffer | null = "";
       routerPathsEnum = RouterPathsEnum;
       @ViewChild("fileInput") fileInput!: ElementRef;
+      @ViewChild("delButton", { static: true }) delButton!: ElementRef;
 
       constructor(
             private categoriesService: CategoriesService,
@@ -38,31 +39,8 @@ export class CategoryForm implements OnInit, OnDestroy {
 
       ngOnInit(): void {
             this.initializeForm();
-            this.route.params
-                  .pipe(
-                        switchMap(params => {
-                              if (params["id"]) {
-                                    this.isNew = false;
-                                    this.categoryId = params["id"];
-                                    return this.createNewCategory(params["id"]);
-                              }
-                              return of(null);
-                        }),
-                        takeUntil(this.isAlive),
-                  )
-                  .subscribe(
-                        category => {
-                              if (category) {
-                                    this.categoryForm.patchValue({
-                                          name: category.name,
-                                    });
-                                    this.materialService.updateTextInput();
-                                    this.imagePreview = category.imageSrc || "";
-                              }
-                        },
-                        error =>
-                              this.materialService.toast(error.error.message),
-                  );
+            this.initializeDeleteStream();
+            this.initializeRouterParams();
       }
       createNewCategory(id: string) {
             return this.categoriesService
@@ -82,6 +60,41 @@ export class CategoryForm implements OnInit, OnDestroy {
                         Validators.minLength(5),
                   ]),
             });
+      }
+
+      private initializeDeleteStream() {
+            fromEvent(this.delButton.nativeElement, "click")
+                  .pipe(takeUntil(this.isAlive))
+                  .subscribe(() => this.removeCategory());
+      }
+
+      private initializeRouterParams() {
+            this.route.params
+                  .pipe(
+                        switchMap(params => {
+                              if (params["id"]) {
+                                    this.isNew = false;
+                                    this.categoryId = params["id"];
+                                    return this.createNewCategory(params["id"]);
+                              }
+                              return of(null);
+                        }),
+                        takeUntil(this.isAlive),
+                  )
+                  .subscribe(
+                        category => {
+                              if (category) {
+                                    this.category = category;
+                                    this.categoryForm.patchValue({
+                                          name: category.name,
+                                    });
+                                    this.materialService.updateTextInput();
+                                    this.imagePreview = category.imageSrc || "";
+                              }
+                        },
+                        error =>
+                              this.materialService.toast(error.error.message),
+                  );
       }
 
       submitForm() {
@@ -124,16 +137,29 @@ export class CategoryForm implements OnInit, OnDestroy {
       }
 
       removeCategory() {
-            this.categoryId &&
-                  this.categoriesService
-                        .removeCategory(this.categoryId)
-                        .pipe(takeUntil(this.isAlive))
-                        .subscribe(({ message }) => {
-                              this.materialService.toast(message);
-                              this.router.navigate([
-                                    this.routerPathsEnum.CATEGORIES,
-                              ]);
-                        });
+            console.log(this.category);
+            const decision = window.confirm(
+                  `Фre you sure you want to delete the category ${this.category?.name}?`,
+            );
+            if (decision) {
+                  this.categoryId &&
+                        this.categoriesService
+                              .removeCategory(this.categoryId)
+                              .pipe(takeUntil(this.isAlive))
+                              .subscribe(
+                                    ({ message }) => {
+                                          this.materialService.toast(message);
+                                    },
+                                    error =>
+                                          this.materialService.toast(
+                                                error.error.message,
+                                          ),
+                                    () =>
+                                          this.router.navigate([
+                                                this.routerPathsEnum.CATEGORIES,
+                                          ])
+                              );
+            }
       }
 
       showFileInput() {

@@ -1,6 +1,5 @@
 <main class="content">
       <div class="page-title">
-            {{category|json}}
             <h4>
                   <a [routerLink]="['/',routerPathsEnum.CATEGORIES]"
                         >Categories</a
@@ -10,8 +9,8 @@
             </h4>
             <span>
                   <button
+                        #delButton
                         class="btn btn-small red"
-                        (click)="removeCategory()"
                         [disabled]="isNew">
                         <i class="material-icons">delete</i>
                   </button>

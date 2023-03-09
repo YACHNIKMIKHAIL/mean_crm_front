@@ -137,7 +137,6 @@ export class CategoryForm implements OnInit, OnDestroy {
       }
 
       removeCategory() {
-            console.log(this.category);
             const decision = window.confirm(
                   `Фre you sure you want to delete the category ${this.category?.name}?`,
             );

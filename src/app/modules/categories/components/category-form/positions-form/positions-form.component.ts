@@ -26,6 +26,7 @@ export class PositionsFormComponent
 {
       positions$: Observable<PositionInterface[] | null> = of(null);
       modal: MaterialInterface | undefined;
+      isUpdateMode = false;
       addPositionForm!: FormGroup;
       isAlive = new Subject<void>();
       @Input("categoryId") categoryIdProps: string | undefined;
@@ -79,7 +80,13 @@ export class PositionsFormComponent
       }
 
       selectPosition(position: PositionInterface) {
-            console.log(position);
+            this.addPositionForm.patchValue({
+                  posName: position.name,
+                  posCost: position.cost,
+            });
+            this.materialService.updateTextInput();
+            this.modal?.open();
+            this.isUpdateMode = true;
       }
 
       hideModal() {
@@ -87,24 +94,33 @@ export class PositionsFormComponent
       }
 
       submitPosition() {
-            console.log("submitPosition");
             const name = this.addPositionForm.get("posName")?.value;
             const cost = this.addPositionForm.get("posCost")?.value;
-            this.categoryIdProps &&
-                  this.positionsService
-                        .createPosition(name, cost, this.categoryIdProps)
-                        .pipe(takeUntil(this.isAlive))
-                        .subscribe(
-                              () => {
-                                    this.modal?.close();
-                                    this.initializePositions();
-                                    this.addPositionForm.reset();
-                              },
-                              err =>
-                                    this.materialService.toast(
-                                          err.error.message,
-                                    ),
+            let stream$ = of({} as PositionInterface);
+            if (this.categoryIdProps && this.isUpdateMode) {
+                  stream$ = this.positionsService
+                        .updatePosition(this.categoryIdProps, name, cost)
+                        .pipe(takeUntil(this.isAlive));
+            } else if (this.categoryIdProps) {
+                  stream$ = this.positionsService
+                        .createPosition(this.categoryIdProps, name, cost)
+                        .pipe(takeUntil(this.isAlive));
+            }
+
+            stream$.subscribe(
+                  position => {
+                        this.modal?.close();
+                        this.initializePositions();
+                        this.addPositionForm.reset();
+                        this.materialService.toast(
+                              this.isUpdateMode
+                                    ? `Position ${position.name} was updated`
+                                    : `Position ${position.name} was created`,
                         );
+                        this.isUpdateMode = false;
+                  },
+                  err => this.materialService.toast(err.error.message),
+            );
       }
 
       removePosition(_id: string) {

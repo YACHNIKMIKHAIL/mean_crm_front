@@ -11,27 +11,38 @@ import { MessageInterface } from "../../interfaces/message.interface";
 export class PositionsService {
       constructor(private http: HttpClient) {}
 
+      createPosition(
+            categoryId: string,
+            name: string,
+            cost: number,
+      ): Observable<PositionInterface> {
+            //name, cost, category
+            const body = { name, cost, category: categoryId };
+            return this.http.post<PositionInterface>(
+                  environment.urls.position,
+                  body,
+            );
+      }
+
       getAllPositions(categoryId: string): Observable<PositionInterface[]> {
             return this.http.get<PositionInterface[]>(
                   `${environment.urls.position}/${categoryId}`,
             );
       }
-
-      createPosition(
-            name: string,
-            cost: number,
-            categoryId: string,
-      ): Observable<PositionInterface[]> {
-            //name, cost, category
-            const body = { name, cost, category: categoryId };
-            return this.http.post<PositionInterface[]>(
-                  environment.urls.position,
-                  body,
-            );
-      }
       removePosition(id: string): Observable<MessageInterface> {
             return this.http.delete<MessageInterface>(
                   `${environment.urls.position}/${id}`,
+            );
+      }
+
+      updatePosition(
+            categoryId: string,
+            name?: string,
+            cost?: number,
+      ): Observable<PositionInterface> {
+            return this.http.patch<PositionInterface>(
+                  `${environment.urls.position}/${categoryId}`,
+                  { name, cost },
             );
       }
 }

@@ -18,19 +18,31 @@
                                     *ngFor="
                                           let position of positions$ | async;
                                           trackBy: trackById
-                                    "
-                                    (click)="selectPosition(position)">
+                                    ">
                                     <span>
                                           {{ position.name }}
                                           <strong>{{ position.cost }} $</strong>
                                     </span>
-                                    <span
-                                          (click)="
-                                                removePosition(
-                                                      position._id || ''
-                                                )
-                                          ">
-                                          <i class="material-icons">delete</i>
+                                    <span>
+                                          <span
+                                                class="mr15"
+                                                (click)="
+                                                      selectPosition(position)
+                                                ">
+                                                <i class="material-icons"
+                                                      >mode_edit</i
+                                                >
+                                          </span>
+                                          <span
+                                                (click)="
+                                                      removePosition(
+                                                            position._id || ''
+                                                      )
+                                                ">
+                                                <i class="material-icons"
+                                                      >delete</i
+                                                >
+                                          </span>
                                     </span>
                               </a>
                         </div>

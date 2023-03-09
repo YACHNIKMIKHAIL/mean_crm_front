@@ -14,11 +14,7 @@ import {
       MaterialInterface,
       MaterialService,
 } from "../../../../../shared/classes/material.service";
-import {
-      FormControl,
-      FormGroup,
-      Validators,
-} from "@angular/forms";
+import { FormControl, FormGroup, Validators } from "@angular/forms";
 
 @Component({
       selector: "crm-positions-form",
@@ -98,9 +94,29 @@ export class PositionsFormComponent
                   this.positionsService
                         .createPosition(name, cost, this.categoryIdProps)
                         .pipe(takeUntil(this.isAlive))
-                        .subscribe(() => {
-                              this.modal?.close();
+                        .subscribe(
+                              () => {
+                                    this.modal?.close();
+                                    this.initializePositions();
+                                    this.addPositionForm.reset();
+                              },
+                              err =>
+                                    this.materialService.toast(
+                                          err.error.message,
+                                    ),
+                        );
+      }
+
+      removePosition(_id: string) {
+            this.positionsService
+                  .removePosition(_id)
+                  .pipe(takeUntil(this.isAlive))
+                  .subscribe(
+                        ({ message }) => {
+                              this.materialService.toast(message);
                               this.initializePositions();
-                        });
+                        },
+                        err => this.materialService.toast(err.error.message),
+                  );
       }
 }

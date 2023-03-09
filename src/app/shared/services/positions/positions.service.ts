@@ -3,6 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { environment } from "../../../../enviroments/environment";
 import { PositionInterface } from "../../interfaces/position.interface";
+import { MessageInterface } from "../../interfaces/message.interface";
 
 @Injectable({
       providedIn: "root",
@@ -26,6 +27,11 @@ export class PositionsService {
             return this.http.post<PositionInterface[]>(
                   environment.urls.position,
                   body,
+            );
+      }
+      removePosition(id: string): Observable<MessageInterface> {
+            return this.http.delete<MessageInterface>(
+                  `${environment.urls.position}/${id}`,
             );
       }
 }

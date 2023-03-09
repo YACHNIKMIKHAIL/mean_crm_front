@@ -45,10 +45,16 @@
                   </div>
 
                   <div>
+                        <input
+                              type="file"
+                              class="dn"
+                              #fileInput
+                              (change)="onFileUpload($event)" />
                         <button
                               type="button"
                               [disabled]="categoryForm.invalid ||categoryForm.disabled"
-                              class="waves-effect waves-light btn orange lighten-2 mb2">
+                              class="waves-effect waves-light btn orange lighten-2 mb2"
+                              (click)="showFileInput()">
                               <i class="material-icons left">backup</i>
                               Upload Image
                         </button>
@@ -65,21 +71,16 @@
             </form>
 
             <div class="col s12 l4 center">
-                  <ng-container *ngIf="!isNew; else addImage">
-                        <ng-container
-                              *ngIf="category?.imageSrc||''; else noImage">
-                              <img
-                                    class="responsive-img"
-                                    style="height: 200px"
-                                    [src]="category?.imageSrc||''"
-                                    alt="image" />
-                        </ng-container>
-                        <ng-template #noImage>
-                              <i class="large material-icons">broken_image</i>
-                        </ng-template>
+                  <ng-container *ngIf="imagePreview; else noImage">
+                        <img
+                              class="responsive-img h200"
+                              [src]="imagePreview"
+                              alt="image" />
                   </ng-container>
-                  <ng-template #addImage>
-                        <i class="large material-icons">add_a_photo</i>
+                  <ng-template #noImage>
+                        <i class="large material-icons"
+                              >{{isNew?'add_a_photo':'broken_image'}}</i
+                        >
                   </ng-template>
             </div>
       </div>

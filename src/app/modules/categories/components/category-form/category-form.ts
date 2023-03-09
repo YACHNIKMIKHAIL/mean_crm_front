@@ -1,4 +1,10 @@
-import { Component, OnDestroy, OnInit } from "@angular/core";
+import {
+      Component,
+      ElementRef,
+      OnDestroy,
+      OnInit,
+      ViewChild,
+} from "@angular/core";
 import { RouterPathsEnum } from "../../../../shared/enums/routerPaths.enum";
 import { of, Subject, switchMap, takeUntil } from "rxjs";
 import { CategoryInterface } from "../../../../shared/interfaces/category.interface";
@@ -18,7 +24,10 @@ export class CategoryForm implements OnInit, OnDestroy {
       isNew = true;
       categoryForm!: FormGroup;
       isAlive = new Subject<void>();
+      image: File | undefined;
+      imagePreview: string | ArrayBuffer | null = "";
       routerPathsEnum = RouterPathsEnum;
+      @ViewChild("fileInput") fileInput!: ElementRef;
 
       constructor(
             private categoriesService: CategoriesService,
@@ -48,6 +57,7 @@ export class CategoryForm implements OnInit, OnDestroy {
                                           name: category.name,
                                     });
                                     this.materialService.updateTextInput();
+                                    this.imagePreview = category.imageSrc || "";
                               }
                         },
                         error =>
@@ -75,31 +85,42 @@ export class CategoryForm implements OnInit, OnDestroy {
       }
 
       submitForm() {
+            this.categoryForm.disable();
             const categoryName = this.categoryForm.get("name")?.value;
+
+            let stream = of({} as CategoryInterface);
             if (this.isNew) {
-                  this.categoriesService
-                        .createCategory(categoryName)
-                        .pipe(takeUntil(this.isAlive))
-                        .subscribe(newCat => {
-                              this.initializeForm();
-                              this.materialService.toast(
-                                    "Category was created.",
-                              );
+                  stream = this.categoriesService
+                        .createCategory(categoryName, this.image)
+                        .pipe(takeUntil(this.isAlive));
+            } else if (!this.isNew && this.categoryId) {
+                  stream = this.categoriesService
+                        .updateCategory(
+                              categoryName,
+                              this.categoryId,
+                              this.image,
+                        )
+                        .pipe(takeUntil(this.isAlive));
+            }
+            stream.subscribe(
+                  newCat => {
+                        if (this.isNew) {
                               this.router.navigate([
                                     this.routerPathsEnum.CATEGORIES,
                                     newCat._id,
                               ]);
-                        });
-            } else if (!this.isNew && this.categoryId) {
-                  this.categoriesService
-                        .updateCategory(categoryName, this.categoryId)
-                        .pipe(takeUntil(this.isAlive))
-                        .subscribe(() => {
-                              this.materialService.toast(
-                                    "Category was updated.",
-                              );
-                        });
-            }
+                        }
+                        this.materialService.toast(
+                              this.isNew
+                                    ? "Category was created."
+                                    : "Category was updated.",
+                        );
+                  },
+                  error => {
+                        this.categoryForm.enable();
+                        this.materialService.toast(error.error.message);
+                  },
+            );
       }
 
       removeCategory() {
@@ -113,5 +134,22 @@ export class CategoryForm implements OnInit, OnDestroy {
                                     this.routerPathsEnum.CATEGORIES,
                               ]);
                         });
+      }
+
+      showFileInput() {
+            this.fileInput.nativeElement.click();
+      }
+
+      onFileUpload(event: any) {
+            const file = event.target.files[0];
+            this.image = file;
+
+            const reader = new FileReader();
+
+            reader.onload = () => {
+                  this.imagePreview = reader.result;
+            };
+
+            reader.readAsDataURL(file);
       }
 }

@@ -22,16 +22,34 @@ export class CategoriesService {
             );
       }
 
-      createCategory(name: string): Observable<CategoryInterface> {
+      createCategory(
+            name: string,
+            image?: File,
+      ): Observable<CategoryInterface> {
+            const formData = new FormData();
+            formData.append("name", name);
+            if (image) {
+                  formData.append("image", image, image.name);
+            }
             return this.http.post<CategoryInterface>(
                   environment.urls.categories,
-                  { name },
+                  formData,
             );
       }
-      updateCategory(name: string, id: string): Observable<CategoryInterface> {
+      updateCategory(
+            name: string,
+            id: string,
+            image?: File,
+      ): Observable<CategoryInterface> {
+            const formData = new FormData();
+            formData.append("name", name);
+            if (image) {
+                  formData.append("image", image, image.name);
+            }
+
             return this.http.patch<CategoryInterface>(
                   `${environment.urls.categories}/${id}`,
-                  { name },
+                  formData,
             );
       }
 

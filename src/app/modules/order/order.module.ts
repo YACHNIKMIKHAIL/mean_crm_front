@@ -6,6 +6,7 @@ import { OrderCategoriesComponent } from "./component/order-categories/order-cat
 import { RouterLink, RouterOutlet } from "@angular/router";
 import { LoaderModule } from "../../shared/components/loader/loader.module";
 import { OrderService } from "./service/order.service";
+import { FormsModule } from "@angular/forms";
 
 @NgModule({
       declarations: [
@@ -13,7 +14,13 @@ import { OrderService } from "./service/order.service";
             OrderPositionsComponent,
             OrderCategoriesComponent,
       ],
-      imports: [CommonModule, RouterOutlet, RouterLink, LoaderModule],
+      imports: [
+            CommonModule,
+            RouterOutlet,
+            RouterLink,
+            LoaderModule,
+            FormsModule,
+      ],
       providers: [OrderService],
 })
 export class OrderModule {}

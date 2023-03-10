@@ -5,3 +5,7 @@ export interface PositionInterface {
       user?: string;
       _id?: string;
 }
+
+export interface PositionWithQuantityInterface extends PositionInterface {
+      quantity?: number;
+}

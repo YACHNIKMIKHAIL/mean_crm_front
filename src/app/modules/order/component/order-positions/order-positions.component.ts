@@ -17,12 +17,8 @@ export class OrderPositionsComponent implements OnInit {
       ) {}
 
       ngOnInit(): void {
-            this.route.queryParams.subscribe(params => {
-                  if (params["id"]) {
-                        this.positions$ = this.positionsService.getAllPositions(
-                              params["id"],
-                        );
-                  }
-            });
+            this.positions$ = this.positionsService.getAllPositions(
+                  this.route.snapshot.params["id"],
+            );
       }
 }

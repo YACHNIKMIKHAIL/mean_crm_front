@@ -24,7 +24,7 @@ export class MaterialService {
             M.updateTextFields();
       }
 
-      showModal(elem: ElementRef): MaterialInterface {
+      initModal(elem: ElementRef): MaterialInterface {
             return M.Modal.init(elem);
       }
 }

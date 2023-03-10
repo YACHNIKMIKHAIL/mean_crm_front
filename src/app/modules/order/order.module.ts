@@ -5,6 +5,7 @@ import { OrderPositionsComponent } from "./component/order-positions/order-posit
 import { OrderCategoriesComponent } from "./component/order-categories/order-categories.component";
 import { RouterLink, RouterOutlet } from "@angular/router";
 import { LoaderModule } from "../../shared/components/loader/loader.module";
+import { OrderService } from "./service/order.service";
 
 @NgModule({
       declarations: [
@@ -13,5 +14,6 @@ import { LoaderModule } from "../../shared/components/loader/loader.module";
             OrderCategoriesComponent,
       ],
       imports: [CommonModule, RouterOutlet, RouterLink, LoaderModule],
+      providers: [OrderService],
 })
 export class OrderModule {}

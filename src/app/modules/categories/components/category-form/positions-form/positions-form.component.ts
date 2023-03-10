@@ -77,7 +77,7 @@ export class PositionsFormComponent
       }
 
       ngAfterViewInit(): void {
-            this.modal = this.materialService.showModal(
+            this.modal = this.materialService.initModal(
                   this.modalRef.nativeElement,
             );
       }

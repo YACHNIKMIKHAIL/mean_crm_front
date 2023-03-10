@@ -12,9 +12,7 @@ import { CategoryInterface } from "../../../../shared/interfaces/category.interf
 export class OrderCategoriesComponent implements OnInit {
       routerPathsEnum = RouterPathsEnum;
       categories$!: Observable<CategoryInterface[]>;
-      constructor(
-            private categoriesService: CategoriesService,
-      ) {}
+      constructor(private categoriesService: CategoriesService) {}
       trackByIndex(index: number) {
             return index;
       }

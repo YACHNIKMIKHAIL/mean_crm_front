@@ -25,7 +25,7 @@ export class OrderComponent implements OnInit, OnDestroy, AfterViewInit {
       routesPaths = RouterPathsEnum;
       isRoot: boolean | undefined;
       isAlive = new Subject<void>();
-      positionsToOrder: PositionWithQuantityInterface[] | undefined;
+      listToOrder: PositionWithQuantityInterface[] | undefined;
       @ViewChild("modal") modalRef!: ElementRef;
       private modal!: MaterialInterface;
       constructor(
@@ -57,7 +57,7 @@ export class OrderComponent implements OnInit, OnDestroy, AfterViewInit {
       }
 
       showModal() {
-            this.positionsToOrder = this.orderService.positions;
+            this.listToOrder = this.orderService.positions;
             this.modal.open();
       }
 
@@ -70,14 +70,14 @@ export class OrderComponent implements OnInit, OnDestroy, AfterViewInit {
       }
 
       allPrice(): number {
-            return (
-                  this.positionsToOrder?.reduce((acc, el) => {
-                        return acc + el.cost * (el.quantity ? el.quantity : 1);
-                  }, 0) || 0
-            );
+            return this.orderService.price;
       }
 
-  removePosFromOrder(_id: string) {
-    this.orderService.remove(_id)
-  }
+      removePosFromOrder(_id: string) {
+            this.orderService.remove(_id);
+      }
+
+      trackById(index: number, item: PositionWithQuantityInterface) {
+            return item._id;
+      }
 }

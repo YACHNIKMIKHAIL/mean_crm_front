@@ -4,6 +4,7 @@ import { ActivatedRoute, Params } from "@angular/router";
 import { map, Observable, switchMap } from "rxjs";
 import { PositionWithQuantityInterface } from "../../../../shared/interfaces/position.interface";
 import { OrderService } from "../../service/order.service";
+import { MaterialService } from "../../../../shared/classes/material.service";
 
 @Component({
       selector: "app-order-positions",
@@ -16,6 +17,7 @@ export class OrderPositionsComponent implements OnInit {
             private positionsService: PositionsService,
             private route: ActivatedRoute,
             private orderService: OrderService,
+            private materialService: MaterialService,
       ) {}
 
       ngOnInit(): void {
@@ -30,6 +32,13 @@ export class OrderPositionsComponent implements OnInit {
       }
 
       addToOrder(position: PositionWithQuantityInterface) {
+            this.materialService.toast(
+                  `Position ${position.name} x${position.quantity} is added.`,
+            );
             this.orderService.add(position);
       }
+
+      // isAlreadyOrdered(position: PositionWithQuantityInterface): boolean {
+      //       return this.orderService.positions.includes(position);
+      // }
 }

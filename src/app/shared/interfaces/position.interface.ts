@@ -9,3 +9,11 @@ export interface PositionInterface {
 export interface PositionWithQuantityInterface extends PositionInterface {
       quantity?: number;
 }
+
+export interface OrderInterface {
+      date?: Date;
+      order?: number;
+      list: PositionWithQuantityInterface[];
+      user?: string;
+      _id?: string;
+}

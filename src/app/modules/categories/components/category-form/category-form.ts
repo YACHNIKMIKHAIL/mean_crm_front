@@ -8,7 +8,7 @@ import {
 import { RouterPathsEnum } from "../../../../shared/enums/routerPaths.enum";
 import { fromEvent, of, Subject, switchMap, takeUntil } from "rxjs";
 import { CategoryInterface } from "../../../../shared/interfaces/category.interface";
-import { CategoriesService } from "../../services/categories.service";
+import { CategoriesService } from "../../../../shared/services/categories/categories.service";
 import { ActivatedRoute, Router } from "@angular/router";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { MaterialService } from "../../../../shared/classes/material.service";

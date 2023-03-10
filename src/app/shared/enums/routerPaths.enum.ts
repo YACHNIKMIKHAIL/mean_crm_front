@@ -10,9 +10,3 @@ export enum RouterPathsEnum {
       NEW = "new",
       ID = ":id",
 }
-
-// Review
-// Analytics
-// Story
-// Add order
-// Range

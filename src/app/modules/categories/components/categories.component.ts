@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { RouterPathsEnum } from "../../../shared/enums/routerPaths.enum";
-import { CategoriesService } from "../services/categories.service";
+import { CategoriesService } from "../../../shared/services/categories/categories.service";
 import { delay, Observable } from "rxjs";
 import { CategoryInterface } from "../../../shared/interfaces/category.interface";
 

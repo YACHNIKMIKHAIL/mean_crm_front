@@ -12,6 +12,8 @@ import { CategoriesComponent } from "./modules/categories/components/categories.
 import { OrderComponent } from "./modules/order/component/order.component";
 import { HistoryComponent } from "./modules/history/component/history.component";
 import { CategoryForm } from "./modules/categories/components/category-form/category-form";
+import { OrderCategoriesComponent } from "./modules/order/component/order-categories/order-categories.component";
+import { OrderPositionsComponent } from "./modules/order/component/order-positions/order-positions.component";
 
 const routes: Routes = [
       {
@@ -53,6 +55,16 @@ const routes: Routes = [
                   {
                         path: RouterPathsEnum.ORDER,
                         component: OrderComponent,
+                        children: [
+                              {
+                                    path: RouterPathsEnum.DEFAULT,
+                                    component: OrderCategoriesComponent,
+                              },
+                              {
+                                    path: RouterPathsEnum.ID,
+                                    component: OrderPositionsComponent,
+                              },
+                        ],
                   },
                   {
                         path: RouterPathsEnum.CATEGORIES,

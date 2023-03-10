@@ -1,9 +1,9 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { environment } from "../../../../enviroments/environment";
-import { CategoryInterface } from "../../../shared/interfaces/category.interface";
+import { CategoryInterface } from "../../interfaces/category.interface";
 import { Observable } from "rxjs";
-import { MessageInterface } from "../../../shared/interfaces/message.interface";
+import { MessageInterface } from "../../interfaces/message.interface";
 
 @Injectable({
       providedIn: "root",

@@ -7,6 +7,7 @@
                   Add products
             </h4>
             <button
+                  [disabled]="!(listToOrder$ | async)?.length"
                   class="waves-effect btn grey darken-1"
                   (click)="showModal()">
                   Complete
@@ -31,7 +32,8 @@
                         <tbody>
                               <tr
                                     *ngFor="
-                                          let item of listToOrder;
+                                          let item of listToOrder$
+                                                | async as listToOrder;
                                           trackBy: trackById
                                     ">
                                     <td>{{ item.name }}</td>
@@ -68,6 +70,7 @@
                         >Cancel</button
                   >
                   <button
+                        [disabled]="!(listToOrder$ | async)?.length"
                         (click)="submit()"
                         class="modal-action btn waves-effect"
                         >Confirm</button

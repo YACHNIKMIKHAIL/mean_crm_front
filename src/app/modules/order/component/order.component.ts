@@ -8,7 +8,7 @@ import {
 } from "@angular/core";
 import { RouterPathsEnum } from "../../../shared/enums/routerPaths.enum";
 import { NavigationEnd, Router } from "@angular/router";
-import { Subject, takeUntil } from "rxjs";
+import { Observable, Subject, takeUntil } from "rxjs";
 import {
       MaterialInterface,
       MaterialService,
@@ -25,7 +25,7 @@ export class OrderComponent implements OnInit, OnDestroy, AfterViewInit {
       routesPaths = RouterPathsEnum;
       isRoot: boolean | undefined;
       isAlive = new Subject<void>();
-      listToOrder: PositionWithQuantityInterface[] | undefined;
+      listToOrder$: Observable<PositionWithQuantityInterface[]> | undefined;
       @ViewChild("modal") modalRef!: ElementRef;
       private modal!: MaterialInterface;
       constructor(
@@ -48,6 +48,8 @@ export class OrderComponent implements OnInit, OnDestroy, AfterViewInit {
                                     this.router.url ===
                                     `/${this.routesPaths.ORDER}`;
                   });
+
+            this.listToOrder$ = this.orderService.positions;
       }
 
       ngAfterViewInit(): void {
@@ -57,7 +59,7 @@ export class OrderComponent implements OnInit, OnDestroy, AfterViewInit {
       }
 
       showModal() {
-            this.listToOrder = this.orderService.positions;
+            // this.listToOrder = this.orderService.positions;
             this.modal.open();
       }
 

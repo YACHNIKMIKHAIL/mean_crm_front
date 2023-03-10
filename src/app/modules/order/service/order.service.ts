@@ -1,7 +1,6 @@
 import { Injectable } from "@angular/core";
-import {
-      PositionWithQuantityInterface,
-} from "../../../shared/interfaces/position.interface";
+import { PositionWithQuantityInterface } from "../../../shared/interfaces/position.interface";
+import { of } from "rxjs";
 
 @Injectable()
 export class OrderService {
@@ -11,7 +10,7 @@ export class OrderService {
             return this.calculatedPrice;
       }
       get positions() {
-            return this.list;
+            return of(this.list);
       }
 
       constructor() {}

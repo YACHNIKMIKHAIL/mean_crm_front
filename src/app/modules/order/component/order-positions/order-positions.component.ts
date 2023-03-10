@@ -2,9 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { PositionsService } from "../../../../shared/services/positions/positions.service";
 import { ActivatedRoute, Params } from "@angular/router";
 import { map, Observable, switchMap } from "rxjs";
-import {
-      PositionWithQuantityInterface,
-} from "../../../../shared/interfaces/position.interface";
+import { PositionWithQuantityInterface } from "../../../../shared/interfaces/position.interface";
 import { OrderService } from "../../service/order.service";
 
 @Component({

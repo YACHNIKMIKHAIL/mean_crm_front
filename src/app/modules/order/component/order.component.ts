@@ -14,6 +14,7 @@ import {
       MaterialService,
 } from "../../../shared/classes/material.service";
 import { OrderService } from "../service/order.service";
+import { PositionWithQuantityInterface } from "../../../shared/interfaces/position.interface";
 
 @Component({
       selector: "crm-order",
@@ -24,6 +25,7 @@ export class OrderComponent implements OnInit, OnDestroy, AfterViewInit {
       routesPaths = RouterPathsEnum;
       isRoot: boolean | undefined;
       isAlive = new Subject<void>();
+      positionsToOrder: PositionWithQuantityInterface[] | undefined;
       @ViewChild("modal") modalRef!: ElementRef;
       private modal!: MaterialInterface;
       constructor(
@@ -55,6 +57,7 @@ export class OrderComponent implements OnInit, OnDestroy, AfterViewInit {
       }
 
       showModal() {
+            this.positionsToOrder = this.orderService.positions;
             this.modal.open();
       }
 
@@ -65,4 +68,16 @@ export class OrderComponent implements OnInit, OnDestroy, AfterViewInit {
       submit() {
             console.log("submit order");
       }
+
+      allPrice(): number {
+            return (
+                  this.positionsToOrder?.reduce((acc, el) => {
+                        return acc + el.cost * (el.quantity ? el.quantity : 1);
+                  }, 0) || 0
+            );
+      }
+
+  removePosFromOrder(_id: string) {
+    this.orderService.remove(_id)
+  }
 }

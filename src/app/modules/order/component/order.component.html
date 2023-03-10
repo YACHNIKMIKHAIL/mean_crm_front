@@ -29,31 +29,16 @@
                         </thead>
 
                         <tbody>
-                              <tr>
-                                    <td>Alvin</td>
-                                    <td>3</td>
-                                    <td>$0.87</td>
+                              <tr *ngFor="let posToOrder of positionsToOrder">
+                                    <td>{{ posToOrder.name }}</td>
+                                    <td>{{ posToOrder.quantity }}</td>
                                     <td
-                                          ><i class="material-icons pointer"
-                                                >delete</i
-                                          ></td
+                                          >${{
+                                                (posToOrder.cost || 0) *
+                                                      (posToOrder.quantity || 0)
+                                          }}</td
                                     >
-                              </tr>
-                              <tr>
-                                    <td>Alan</td>
-                                    <td>1</td>
-                                    <td>$3.76</td>
-                                    <td
-                                          ><i class="material-icons pointer"
-                                                >delete</i
-                                          ></td
-                                    >
-                              </tr>
-                              <tr>
-                                    <td>Jonathan</td>
-                                    <td>2</td>
-                                    <td>$7.00</td>
-                                    <td
+                                    <td (click)="removePosFromOrder(posToOrder._id || '')"
                                           ><i class="material-icons pointer"
                                                 >delete</i
                                           ></td
@@ -62,7 +47,10 @@
                         </tbody>
                   </table>
                   <div class="order-summary">
-                        <p>Общая стоимость <strong>22 231 руб.</strong></p>
+                        <p
+                              >Общая стоимость
+                              <strong>{{ allPrice() }} $</strong></p
+                        >
                   </div>
             </div>
             <div class="modal-footer">

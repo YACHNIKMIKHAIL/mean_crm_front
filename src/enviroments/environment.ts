@@ -6,4 +6,5 @@ export const environment = {
             position: "/crm/position",
             order: "/crm/order",
       },
+      STEP: 2,
 };

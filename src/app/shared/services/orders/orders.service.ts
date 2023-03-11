@@ -17,15 +17,10 @@ export class OrdersService {
             );
       }
 
-      getAllOrders(
-            params: {
-                  offset: number;
-                  limit: number;
-            } = {} as {
-                  offset: number;
-                  limit: number;
-            },
-      ): Observable<OrderInterface[]> {
+      getAllOrders(params: {
+            offset: number;
+            limit: number;
+      }): Observable<OrderInterface[]> {
             return this.http.get<OrderInterface[]>(environment.urls.order, {
                   params: new HttpParams({ fromObject: params }),
             });

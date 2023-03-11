@@ -1,16 +1,16 @@
 <table class="highlight mb2">
-      <thead>
-            <tr>
-                  <th>№</th>
-                  <th>date</th>
-                  <th>Time</th>
-                  <th>Sum</th>
-                  <th></th>
-            </tr>
-      </thead>
-
       <ng-container
             *ngIf="historyListProps | async as historyList; else loading">
+            <thead>
+                  <tr>
+                        <th>№</th>
+                        <th>date</th>
+                        <th>Time</th>
+                        <th>Sum</th>
+                        <th></th>
+                  </tr>
+            </thead>
+
             <tbody>
                   <tr *ngFor="let historyItem of historyList">
                         <td>{{ historyItem.order }}</td>
@@ -28,6 +28,7 @@
                   </tr>
             </tbody>
       </ng-container>
+
       <ng-template #loading>
             <crm-loader></crm-loader>
       </ng-template>

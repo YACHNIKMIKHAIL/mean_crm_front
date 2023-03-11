@@ -13,6 +13,7 @@ import {
 import { OrdersService as HttpOrdersService } from "../../../shared/services/orders/orders.service";
 import { Observable } from "rxjs";
 import { OrderInterface } from "../../../shared/interfaces/position.interface";
+import { environment } from "../../../../enviroments/environment";
 
 @Component({
       selector: "crm-history",
@@ -21,6 +22,8 @@ import { OrderInterface } from "../../../shared/interfaces/position.interface";
 })
 export class HistoryComponent implements AfterViewInit, OnDestroy, OnInit {
       showFilter = false;
+      offset = 0;
+      limit = environment.STEP;
       filterTooltip!: MaterialInterface;
       historyList!: Observable<OrderInterface[]>;
       @ViewChild("tooltip") tooltipRef: ElementRef | undefined;
@@ -34,7 +37,9 @@ export class HistoryComponent implements AfterViewInit, OnDestroy, OnInit {
       }
 
       loadMore() {
-            console.log("load more");
+            this.limit += environment.STEP;
+            this.fetch();
+            console.log(this.limit);
       }
 
       ngAfterViewInit(): void {
@@ -66,6 +71,14 @@ export class HistoryComponent implements AfterViewInit, OnDestroy, OnInit {
       }
 
       ngOnInit(): void {
-            this.historyList = this.httpOrdersService.getAllOrders();
+            this.fetch();
+      }
+
+      private fetch() {
+            const params = {
+                  offset: this.offset,
+                  limit: this.limit,
+            };
+            this.historyList = this.httpOrdersService.getAllOrders(params);
       }
 }

@@ -15,7 +15,7 @@ export class HistoryListComponent {
 
       calculateCost(historyItem: OrderInterface): number {
             return historyItem.list.reduce((acc, el) => {
-                  return acc += el.cost;
+                  return (acc += el.cost);
             }, 0);
       }
 }

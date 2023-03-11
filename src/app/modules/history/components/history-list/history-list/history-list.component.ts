@@ -8,7 +8,6 @@ import {
 } from "@angular/core";
 import {
       OrderInterface,
-      PositionWithQuantityInterface,
 } from "../../../../../shared/interfaces/position.interface";
 import {
       MaterialInterface,
@@ -22,23 +21,19 @@ import {
 })
 export class HistoryListComponent implements AfterViewInit, OnDestroy {
       modalWindow!: MaterialInterface;
-      historyItem!: OrderInterface;
+      selectedOrder!: OrderInterface;
       @Input("historyList") historyListProps!: OrderInterface[] | null;
       @ViewChild("modal") modalRef!: ElementRef;
       constructor(private materialService: MaterialService) {}
-      triggerModal(id: string) {
-            if (this.historyListProps) {
-                  this.historyItem = this.historyListProps.filter(
-                        o => o._id === id,
-                  )[0];
-            }
-            console.log("triggerModal", this.historyItem);
+
+      selectOrder(item: OrderInterface) {
+            this.selectedOrder = item;
             this.modalWindow.open();
       }
 
-      calculateCost(historyItem: OrderInterface): number {
+      calculateTotalCost(historyItem: OrderInterface): number {
             return historyItem.list.reduce((acc, el) => {
-                  return (acc += el.cost);
+                  return (acc += el.quantity ? el.cost * el.quantity : el.cost);
             }, 0);
       }
 
@@ -58,11 +53,5 @@ export class HistoryListComponent implements AfterViewInit, OnDestroy {
 
       ngOnDestroy(): void {
             this.modalWindow.destroy();
-      }
-
-      calculateCostOfOrder(list: PositionWithQuantityInterface[]) {
-            return list.reduce((acc, el) => {
-                  return (acc += el.cost);
-            }, 0);
       }
 }

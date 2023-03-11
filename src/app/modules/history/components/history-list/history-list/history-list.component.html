@@ -16,12 +16,12 @@
                         trackBy: trackById
                   ">
                   <td>{{ historyItem.order }}</td>
-                  <td>{{ historyItem.date | date : "dd.MM.YYYY" }}</td>
-                  <td>{{ historyItem.date | date : "hh:mm" }}</td>
-                  <td>{{ calculateCost(historyItem) }} $</td>
+                  <td>{{ historyItem.date | date : "dd.MM.yyyy" }}</td>
+                  <td>{{ historyItem.date | date : "HH:mm:ss" }}</td>
+                  <td>{{ calculateTotalCost(historyItem) }} $</td>
                   <td>
                         <button
-                              (click)="triggerModal(historyItem._id || '')"
+                              (click)="selectOrder(historyItem)"
                               class="btn btn-small grey darken-1">
                               <i class="material-icons">open_in_new</i>
                         </button>
@@ -31,8 +31,8 @@
 </table>
 
 <div #modal class="modal modal-fixed-footer">
-      <div class="modal-content" *ngIf="historyItem">
-            <h4 class="mb1">№{{ historyItem.order }}</h4>
+      <div class="modal-content" *ngIf="selectedOrder">
+            <h4 class="mb1">Order №{{ selectedOrder.order }}</h4>
             <table class="highlight">
                   <thead>
                         <tr>
@@ -43,21 +43,20 @@
                   </thead>
 
                   <tbody>
-                        <tr>
-                              <td>{{ historyItem.user || "no user" }}</td>
-                              <td>{{ historyItem.list.length }}</td>
-                              <td
-                                    >${{
-                                          calculateCostOfOrder(
-                                                historyItem?.list || []
-                                          )
-                                    }}</td
-                              >
+                        <tr *ngFor="let item of selectedOrder.list">
+                              <td>{{ item.name }}</td>
+                              <td>{{ item.quantity }}</td>
+                              <td>${{ item.cost }}</td>
                         </tr>
                   </tbody>
             </table>
             <div class="order-summary">
-                  <p>total cost <strong>22 231 руб.</strong></p>
+                  <p
+                        >total cost
+                        <strong
+                              >{{ calculateTotalCost(selectedOrder) }} $</strong
+                        ></p
+                  >
             </div>
       </div>
       <div class="modal-footer">

@@ -4,5 +4,6 @@ export const environment = {
             auth: "/crm/auth",
             categories: "/crm/category",
             position: "/crm/position",
+            order: "/crm/order",
       },
 };

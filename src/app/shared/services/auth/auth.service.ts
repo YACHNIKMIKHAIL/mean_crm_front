@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { UserInterface } from "../../interfaces/auth.interface";
 import { Observable, tap } from "rxjs";
-import { SavingToLocalStorageService } from "../savingToLocalStorage/saving-to-local-storage.service";
+import { PersistenceService } from "../persistance/persistence.service";
 import { environment } from "../../../../enviroments/environment";
 
 @Injectable({
@@ -11,7 +11,7 @@ import { environment } from "../../../../enviroments/environment";
 export class AuthService {
       constructor(
             private http: HttpClient,
-            private savingToLocalStorageService: SavingToLocalStorageService,
+            private savingToLocalStorageService: PersistenceService,
       ) {}
 
       login(payload: UserInterface): Observable<{ token: string }> {

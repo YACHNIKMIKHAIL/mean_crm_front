@@ -7,7 +7,7 @@ import {
       HttpResponse,
 } from "@angular/common/http";
 import { catchError, Observable, throwError } from "rxjs";
-import { SavingToLocalStorageService } from "../services/savingToLocalStorage/saving-to-local-storage.service";
+import { PersistenceService } from "../services/persistance/persistence.service";
 import { Injectable } from "@angular/core";
 import { AuthService } from "../services/auth/auth.service";
 import { Router } from "@angular/router";
@@ -16,7 +16,7 @@ import { RouterPathsEnum } from "../enums/routerPaths.enum";
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
       constructor(
-            private savingToLocalStorageService: SavingToLocalStorageService,
+            private savingToLocalStorageService: PersistenceService,
             private authService: AuthService,
             private router: Router,
       ) {}

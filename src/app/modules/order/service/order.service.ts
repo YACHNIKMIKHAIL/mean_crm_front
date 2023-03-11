@@ -1,16 +1,22 @@
 import { Injectable } from "@angular/core";
 import { PositionWithQuantityInterface } from "../../../shared/interfaces/position.interface";
-import { of } from "rxjs";
 
 @Injectable()
 export class OrderService {
-      private list: PositionWithQuantityInterface[] = [];
+      private listOfPositions: PositionWithQuantityInterface[] = [];
       private calculatedPrice: number = 0;
       get price() {
             return this.calculatedPrice;
       }
-      get positions() {
-            return of(this.list);
+      get list() {
+            return this.listOfPositions;
+      }
+
+      set list(p: any[]) {
+            this.listOfPositions = p;
+      }
+      set price(p: number) {
+            this.calculatedPrice = p;
       }
 
       constructor() {}
@@ -48,6 +54,7 @@ export class OrderService {
 
       clear() {
             this.list = [];
+            this.price = 0;
       }
 
       private calculatePrice() {

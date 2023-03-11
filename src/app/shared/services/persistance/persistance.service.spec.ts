@@ -1,13 +1,13 @@
 import { TestBed } from "@angular/core/testing";
 
-import { SavingToLocalStorageService } from "./saving-to-local-storage.service";
+import { PersistenceService } from "./persistence.service";
 
 describe("SavingToLocalStorageService", () => {
-      let service: SavingToLocalStorageService;
+      let service: PersistenceService;
 
       beforeEach(() => {
             TestBed.configureTestingModule({});
-            service = TestBed.inject(SavingToLocalStorageService);
+            service = TestBed.inject(PersistenceService);
       });
 
       it("should be created", () => {

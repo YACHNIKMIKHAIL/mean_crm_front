@@ -11,7 +11,7 @@ import {
       MaterialService,
 } from "../../../shared/classes/material.service";
 import { OrdersService as HttpOrdersService } from "../../../shared/services/orders/orders.service";
-import { Observable } from "rxjs";
+import { Subject, takeUntil } from "rxjs";
 import { OrderInterface } from "../../../shared/interfaces/position.interface";
 import { environment } from "../../../../enviroments/environment";
 
@@ -25,8 +25,12 @@ export class HistoryComponent implements AfterViewInit, OnDestroy, OnInit {
       offset = 0;
       limit = environment.STEP;
       filterTooltip!: MaterialInterface;
-      historyList!: Observable<OrderInterface[]>;
+      historyList: OrderInterface[] = [];
+      isAlive = new Subject<void>();
       @ViewChild("tooltip") tooltipRef: ElementRef | undefined;
+      loadingFlag = false;
+      reloadingFlag = false;
+      noMoreFlag = false;
       constructor(
             private materialService: MaterialService,
             private httpOrdersService: HttpOrdersService,
@@ -37,9 +41,9 @@ export class HistoryComponent implements AfterViewInit, OnDestroy, OnInit {
       }
 
       loadMore() {
-            this.limit += environment.STEP;
+            this.loadingFlag = true;
+            this.offset += environment.STEP;
             this.fetch();
-            console.log(this.limit);
       }
 
       ngAfterViewInit(): void {
@@ -53,6 +57,8 @@ export class HistoryComponent implements AfterViewInit, OnDestroy, OnInit {
       }
 
       ngOnDestroy(): void {
+            this.isAlive.next();
+            this.isAlive.complete();
             this.filterTooltip.destroy();
       }
 
@@ -71,6 +77,7 @@ export class HistoryComponent implements AfterViewInit, OnDestroy, OnInit {
       }
 
       ngOnInit(): void {
+            this.reloadingFlag = true;
             this.fetch();
       }
 
@@ -79,6 +86,14 @@ export class HistoryComponent implements AfterViewInit, OnDestroy, OnInit {
                   offset: this.offset,
                   limit: this.limit,
             };
-            this.historyList = this.httpOrdersService.getAllOrders(params);
+            this.httpOrdersService
+                  .getAllOrders(params)
+                  .pipe(takeUntil(this.isAlive))
+                  .subscribe(data => {
+                        this.historyList = this.historyList.concat(data);
+                        this.loadingFlag = false;
+                        this.reloadingFlag = false;
+                        this.noMoreFlag = data.length < this.limit;
+                  });
       }
 }

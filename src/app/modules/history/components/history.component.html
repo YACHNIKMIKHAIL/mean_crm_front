@@ -6,7 +6,7 @@
                   (click)="triggerFilter()"
                   class="btn btn-small"
                   [ngClass]="{ opened: showFilter }"
-                  [disabled]="!(historyList | async)"
+                  [disabled]="!historyList"
                   data-position="left"
                   data-tooltip="Open filter">
                   <i class="material-icons">filter_list</i>
@@ -17,13 +17,28 @@
             <crm-history-filter></crm-history-filter>
       </ng-container>
 
-      <crm-history-list [historyList]="historyList"></crm-history-list>
-
-      <div class="center mb2">
-            <button
-                  class="btn waves-effect grey darken-1 btn-small"
-                  (click)="loadMore()"
-                  >Load more</button
-            >
-      </div>
+      <ng-container *ngIf="!reloadingFlag; else reloading">
+            <ng-container *ngIf="historyList.length; else empty">
+                  <crm-history-list
+                        [historyList]="historyList"></crm-history-list>
+            </ng-container>
+            <ng-template #empty>
+                  <div class="center">No orders</div>
+            </ng-template>
+            <div class="center mb2" *ngIf="!noMoreFlag">
+                  <button
+                        [disabled]="noMoreFlag"
+                        *ngIf="!loadingFlag; else loading"
+                        class="btn waves-effect grey darken-1 btn-small"
+                        (click)="loadMore()"
+                        >Load more</button
+                  >
+                  <ng-template #loading>
+                        <crm-loader></crm-loader>
+                  </ng-template>
+            </div>
+      </ng-container>
+      <ng-template #reloading>
+            <crm-loader></crm-loader>
+      </ng-template>
 </main>

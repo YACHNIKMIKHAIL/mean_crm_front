@@ -1,42 +1,38 @@
 <table class="highlight mb2">
-      <ng-container
-            *ngIf="historyListProps | async as historyList; else loading">
-            <thead>
-                  <tr>
-                        <th>№</th>
-                        <th>date</th>
-                        <th>Time</th>
-                        <th>Sum</th>
-                        <th></th>
-                  </tr>
-            </thead>
+      <thead>
+            <tr>
+                  <th>№</th>
+                  <th>date</th>
+                  <th>Time</th>
+                  <th>Sum</th>
+                  <th></th>
+            </tr>
+      </thead>
 
-            <tbody>
-                  <tr *ngFor="let historyItem of historyList">
-                        <td>{{ historyItem.order }}</td>
-                        <td>{{ historyItem.date | date : "dd.MM.YYYY" }}</td>
-                        <td>{{ historyItem.date | date : "hh:mm" }}</td>
-                        <td>{{ calculateCost(historyItem) }} $</td>
-                        <td>
-                              <button
-                                    (click)="triggerModal()"
-                                    class="btn btn-small modal-trigger grey darken-1"
-                                    data-target="order-list">
-                                    <i class="material-icons">open_in_new</i>
-                              </button>
-                        </td>
-                  </tr>
-            </tbody>
-      </ng-container>
-
-      <ng-template #loading>
-            <crm-loader></crm-loader>
-      </ng-template>
+      <tbody>
+            <tr
+                  *ngFor="
+                        let historyItem of historyListProps;
+                        trackBy: trackById
+                  ">
+                  <td>{{ historyItem.order }}</td>
+                  <td>{{ historyItem.date | date : "dd.MM.YYYY" }}</td>
+                  <td>{{ historyItem.date | date : "hh:mm" }}</td>
+                  <td>{{ calculateCost(historyItem) }} $</td>
+                  <td>
+                        <button
+                              (click)="triggerModal(historyItem._id || '')"
+                              class="btn btn-small grey darken-1">
+                              <i class="material-icons">open_in_new</i>
+                        </button>
+                  </td>
+            </tr>
+      </tbody>
 </table>
 
-<div id="order-list" class="modal modal-fixed-footer">
-      <div class="modal-content">
-            <h4 class="mb1">Order №5</h4>
+<div #modal class="modal modal-fixed-footer">
+      <div class="modal-content" *ngIf="historyItem">
+            <h4 class="mb1">№{{ historyItem.order }}</h4>
             <table class="highlight">
                   <thead>
                         <tr>
@@ -48,9 +44,15 @@
 
                   <tbody>
                         <tr>
-                              <td>Alvin</td>
-                              <td>3</td>
-                              <td>$0.87</td>
+                              <td>{{ historyItem.user || "no user" }}</td>
+                              <td>{{ historyItem.list.length }}</td>
+                              <td
+                                    >${{
+                                          calculateCostOfOrder(
+                                                historyItem?.list || []
+                                          )
+                                    }}</td
+                              >
                         </tr>
                   </tbody>
             </table>
@@ -59,7 +61,9 @@
             </div>
       </div>
       <div class="modal-footer">
-            <button class="modal-action waves-effect waves-black btn-flat"
+            <button
+                  class="modal-action waves-effect waves-black btn-flat"
+                  (click)="closeModal()"
                   >close</button
             >
       </div>

@@ -10,7 +10,7 @@ import { OverviewComponent } from "./modules/overview/component/overview.compone
 import { AnalyticsComponent } from "./modules/analytics/component/analytics.component";
 import { CategoriesComponent } from "./modules/categories/components/categories.component";
 import { OrderComponent } from "./modules/order/component/order.component";
-import { HistoryComponent } from "./modules/history/component/history.component";
+import { HistoryComponent } from "./modules/history/components/history.component";
 import { CategoryForm } from "./modules/categories/components/category-form/category-form";
 import { OrderCategoriesComponent } from "./modules/order/component/order-categories/order-categories.component";
 import { OrderPositionsComponent } from "./modules/order/component/order-positions/order-positions.component";

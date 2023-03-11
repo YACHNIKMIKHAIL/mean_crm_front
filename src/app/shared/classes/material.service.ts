@@ -27,4 +27,8 @@ export class MaterialService {
       initModal(elem: ElementRef): MaterialInterface {
             return M.Modal.init(elem);
       }
+
+      initTooltip(elem: ElementRef): MaterialInterface {
+            return M.Tooltip.init(elem);
+      }
 }

@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpParams } from "@angular/common/http";
 import { environment } from "../../../../enviroments/environment";
 import { OrderInterface } from "../../interfaces/position.interface";
 import { Observable } from "rxjs";
@@ -15,5 +15,19 @@ export class OrdersService {
                   environment.urls.order,
                   newOrder,
             );
+      }
+
+      getAllOrders(
+            params: {
+                  offset: number;
+                  limit: number;
+            } = {} as {
+                  offset: number;
+                  limit: number;
+            },
+      ): Observable<OrderInterface[]> {
+            return this.http.get<OrderInterface[]>(environment.urls.order, {
+                  params: new HttpParams({ fromObject: params }),
+            });
       }
 }

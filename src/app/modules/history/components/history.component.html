@@ -14,7 +14,8 @@
       </div>
 
       <ng-container *ngIf="showFilter">
-            <crm-history-filter></crm-history-filter>
+            <crm-history-filter
+                  (filterBy)="applyFilter($event)"></crm-history-filter>
       </ng-container>
 
       <ng-container *ngIf="!reloadingFlag; else reloading">

@@ -14,6 +14,7 @@ import { OrdersService as HttpOrdersService } from "../../../shared/services/ord
 import { Subject, takeUntil } from "rxjs";
 import { OrderInterface } from "../../../shared/interfaces/position.interface";
 import { environment } from "../../../../enviroments/environment";
+import { FilterInterface } from "../../../shared/interfaces/filter.interface";
 
 @Component({
       selector: "crm-history",
@@ -95,5 +96,9 @@ export class HistoryComponent implements AfterViewInit, OnDestroy, OnInit {
                         this.reloadingFlag = false;
                         this.noMoreFlag = data.length < this.limit;
                   });
+      }
+
+      applyFilter($event: FilterInterface) {
+            console.log("filterBy", $event);
       }
 }

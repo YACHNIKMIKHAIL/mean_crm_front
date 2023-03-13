@@ -6,9 +6,7 @@ import {
       OnDestroy,
       ViewChild,
 } from "@angular/core";
-import {
-      OrderInterface,
-} from "../../../../../shared/interfaces/position.interface";
+import { OrderInterface } from "../../../../../shared/interfaces/position.interface";
 import {
       MaterialInterface,
       MaterialService,

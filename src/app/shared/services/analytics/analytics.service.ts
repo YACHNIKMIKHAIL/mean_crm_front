@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { environment } from "../../../../enviroments/environment";
-import { AnalyticsOverviewResponseInterfaces } from "./analytics.interfaces";
+import { OverviewInterfaces } from "../../interfaces/analytics.interfaces";
 import { Observable } from "rxjs";
 
 @Injectable({
@@ -10,8 +10,8 @@ import { Observable } from "rxjs";
 export class AnalyticsService {
       constructor(private http: HttpClient) {}
 
-      getOverview(): Observable<AnalyticsOverviewResponseInterfaces> {
-            return this.http.get<AnalyticsOverviewResponseInterfaces>(
+      getOverview(): Observable<OverviewInterfaces> {
+            return this.http.get<OverviewInterfaces>(
                   `${environment.urls.analytics}/overview`,
             );
       }

@@ -45,4 +45,7 @@ export class MaterialService {
                   onClose,
             });
       }
+      initTapTarget(elem: ElementRef): MaterialInterface {
+            return M.TapTarget.init(elem);
+      }
 }

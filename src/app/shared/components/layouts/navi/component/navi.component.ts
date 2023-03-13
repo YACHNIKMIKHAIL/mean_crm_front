@@ -13,7 +13,7 @@ export class NaviComponent implements AfterViewInit {
       routerPathsEnum = RouterPathsEnum;
       @ViewChild("floatingB") floatingRef!: ElementRef;
       linksList: NaviInterface[] = [
-            { path: RouterPathsEnum.OVERVIEW, title: "Review" },
+            { path: RouterPathsEnum.OVERVIEW, title: "Overview" },
             { path: RouterPathsEnum.ANALYTICS, title: "Analytics" },
             { path: RouterPathsEnum.HISTORY, title: "History" },
             { path: RouterPathsEnum.ORDER, title: "Add order" },

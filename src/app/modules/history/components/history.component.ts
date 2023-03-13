@@ -32,6 +32,7 @@ export class HistoryComponent implements AfterViewInit, OnDestroy, OnInit {
       loadingFlag = false;
       reloadingFlag = false;
       noMoreFlag = false;
+      private filter: FilterInterface = {};
       constructor(
             private materialService: MaterialService,
             private httpOrdersService: HttpOrdersService,
@@ -39,6 +40,11 @@ export class HistoryComponent implements AfterViewInit, OnDestroy, OnInit {
       triggerFilter() {
             this.showFilter = !this.showFilter;
             this.changeTooltipNotification();
+            if (!this.showFilter && !!Object.keys(this.filter).length) {
+                  this.historyList = [];
+                  this.filter = {};
+                  this.fetch();
+            }
       }
 
       loadMore() {
@@ -51,10 +57,6 @@ export class HistoryComponent implements AfterViewInit, OnDestroy, OnInit {
             this.filterTooltip = this.materialService.initTooltip(
                   this.tooltipRef?.nativeElement,
             );
-      }
-
-      showTooltip() {
-            this.filterTooltip.open();
       }
 
       ngOnDestroy(): void {
@@ -83,10 +85,10 @@ export class HistoryComponent implements AfterViewInit, OnDestroy, OnInit {
       }
 
       private fetch() {
-            const params = {
+            const params = Object.assign({}, this.filter, {
                   offset: this.offset,
                   limit: this.limit,
-            };
+            });
             this.httpOrdersService
                   .getAllOrders(params)
                   .pipe(takeUntil(this.isAlive))
@@ -99,6 +101,14 @@ export class HistoryComponent implements AfterViewInit, OnDestroy, OnInit {
       }
 
       applyFilter($event: FilterInterface) {
-            console.log("filterBy", $event);
+            this.historyList = [];
+            this.offset = 0;
+            this.filter = $event;
+            this.reloadingFlag = true;
+            this.fetch();
+      }
+
+      isFiltered(): boolean {
+            return !!Object.keys(this.filter).length;
       }
 }

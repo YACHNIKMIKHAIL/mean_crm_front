@@ -5,7 +5,7 @@
                   #tooltip
                   (click)="triggerFilter()"
                   class="btn btn-small"
-                  [ngClass]="{ opened: showFilter }"
+                  [ngClass]="{ opened: showFilter, red: isFiltered() }"
                   [disabled]="!historyList"
                   data-position="left"
                   data-tooltip="Open filter">

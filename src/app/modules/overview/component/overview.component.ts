@@ -22,6 +22,7 @@ import {
 export class OverviewComponent implements OnInit, OnDestroy, AfterViewInit {
       overview$: Observable<OverviewInterfaces> | undefined;
       tapTarget: MaterialInterface | undefined;
+      yesterday = new Date();
       @ViewChild("tapTarget") tapTargetRef: ElementRef | undefined;
       constructor(
             private analyticsService: AnalyticsService,
@@ -30,6 +31,8 @@ export class OverviewComponent implements OnInit, OnDestroy, AfterViewInit {
 
       ngOnInit(): void {
             this.overview$ = this.analyticsService.getOverview();
+
+            this.yesterday.setDate(this.yesterday.getDate() - 1);
       }
 
       ngOnDestroy(): void {}

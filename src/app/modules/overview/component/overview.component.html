@@ -1,7 +1,7 @@
 <main class="content">
       <div class="page-title">
             <h4>
-                  Review for yesterday (09.04.2023)
+                  Review for yesterday ({{ yesterday | date : "dd.MM.yyyy" }})
                   <i
                         class="material-icons black-text pointer"
                         (click)="openTabTarget()"
@@ -33,15 +33,15 @@
                                     </h3>
                                     <p
                                           >Your business revenue yesterday
-                                          {{ overview.gain.percent }}%
+                                          {{ overview.gain.percent || 100 }}%
                                           {{
                                                 overview.gain.isHigher
                                                       ? "above"
                                                       : "lower"
                                           }}
                                           average:
-                                          {{ overview.gain.compare }} $. Per
-                                          day.</p
+                                          {{ overview.gain.compare || 0 }} $.
+                                          Per day.</p
                                     >
                               </div>
                         </div>

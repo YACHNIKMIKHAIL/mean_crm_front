@@ -1,6 +1,6 @@
 {
       "/crm/*": {
-            "target": "http://localhost:5050",
+            "target": "https://crm-back-one.onrender.com",
             "secure": false,
             "logLevel": "debug",
             "changeOrigin": true

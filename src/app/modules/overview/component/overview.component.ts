@@ -7,7 +7,7 @@ import {
       ViewChild,
 } from "@angular/core";
 import { AnalyticsService } from "../../../shared/services/analytics/analytics.service";
-import { OverviewInterfaces } from "../../../shared/interfaces/analytics.interfaces";
+import { OverviewInterface } from "../../../shared/interfaces/analyticsInterface";
 import { Observable } from "rxjs";
 import {
       MaterialInterface,
@@ -20,7 +20,7 @@ import {
       styleUrls: ["./overview.component.css"],
 })
 export class OverviewComponent implements OnInit, OnDestroy, AfterViewInit {
-      overview$: Observable<OverviewInterfaces> | undefined;
+      overview$: Observable<OverviewInterface> | undefined;
       tapTarget: MaterialInterface | undefined;
       yesterday = new Date();
       @ViewChild("tapTarget") tapTargetRef: ElementRef | undefined;

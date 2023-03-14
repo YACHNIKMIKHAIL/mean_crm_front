@@ -2,18 +2,28 @@
       <div class="page-title">
             <h4>Analytics</h4>
       </div>
+      <div [style.display]="!(analytics$ | async) ? 'none' : 'block'">
+            <div class="average-price">
+                  <p
+                        >Average check
+                        <strong
+                              >{{
+                                    (analytics$ | async)?.average || 0
+                              }}
+                              $</strong
+                        ></p
+                  >
+            </div>
 
-      <div class="average-price">
-            <p>Average check <strong>1500 $</strong></p>
-      </div>
+            <div class="analytics-block pb3">
+                  <h5>Revenue</h5>
+                  <canvas #gain></canvas>
+            </div>
 
-      <div class="analytics-block pb3">
-            <h5>Revenue</h5>
-            <canvas></canvas>
+            <div class="analytics-block">
+                  <h5>Orders</h5>
+                  <canvas #order></canvas>
+            </div>
       </div>
-
-      <div class="analytics-block">
-            <h5>Orders</h5>
-            <canvas></canvas>
-      </div>
+      <crm-loader *ngIf="!(analytics$ | async)"></crm-loader>
 </main>

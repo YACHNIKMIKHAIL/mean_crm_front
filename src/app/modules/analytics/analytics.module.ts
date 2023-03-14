@@ -1,9 +1,10 @@
 import { NgModule } from "@angular/core";
-import { CommonModule } from "@angular/common";
 import { AnalyticsComponent } from "./component/analytics.component";
+import { LoaderModule } from "../../shared/components/loader/loader.module";
+import { CommonModule } from "@angular/common";
 
 @NgModule({
       declarations: [AnalyticsComponent],
-      imports: [CommonModule],
+      imports: [CommonModule, LoaderModule],
 })
 export class AnalyticsModule {}

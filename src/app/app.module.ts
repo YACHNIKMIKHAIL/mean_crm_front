@@ -13,6 +13,7 @@ import { OverviewModule } from "./modules/overview/overview.module";
 import { OrderModule } from "./modules/order/order.module";
 import { CategoriesModule } from "./modules/categories/categories.module";
 import { HistoryModule } from "./modules/history/history.module";
+import { AnalyticsModule } from "./modules/analytics/analytics.module";
 
 @NgModule({
       declarations: [AppComponent],
@@ -28,6 +29,7 @@ import { HistoryModule } from "./modules/history/history.module";
             OrderModule,
             CategoriesModule,
             HistoryModule,
+            AnalyticsModule,
       ],
       providers: [
             {

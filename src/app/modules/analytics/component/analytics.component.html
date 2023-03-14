@@ -1,17 +1,11 @@
 <main class="content">
       <div class="page-title">
-            <h4>Analytics</h4>
+            <h4>Analytics{{ pending }}</h4>
       </div>
-      <div [style.display]="!(analytics$ | async) ? 'none' : 'block'">
+      <div [style.display]="pending ? 'none' : 'block'">
             <div class="average-price">
                   <p
-                        >Average check
-                        <strong
-                              >{{
-                                    (analytics$ | async)?.average || 0
-                              }}
-                              $</strong
-                        ></p
+                        >Average check <strong>{{ average || 0 }} $</strong></p
                   >
             </div>
 
@@ -25,5 +19,5 @@
                   <canvas #order></canvas>
             </div>
       </div>
-      <crm-loader *ngIf="!(analytics$ | async)"></crm-loader>
+      <crm-loader *ngIf="pending"></crm-loader>
 </main>
